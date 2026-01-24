@@ -3,8 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B6E796FE-3606-90F3-964E-FB9FC248C429}|Game\\Game.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6E796FE-3606-90F3-964E-FB9FC248C429}|Game\\Game.csproj|solutionrelative:game\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4F57BCAD-A141-4F7D-B24B-0F572756F09B}|Game.Graphics\\Game.Graphics.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.graphics\\graphicsrenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F57BCAD-A141-4F7D-B24B-0F572756F09B}|Game.Graphics\\Game.Graphics.csproj|solutionrelative:game.graphics\\graphicsrenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F92680C8-9BFD-44EF-A53D-22C8268190D0}|Game.Desktop\\Game.Desktop.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.desktop\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F92680C8-9BFD-44EF-A53D-22C8268190D0}|Game.Desktop\\Game.Desktop.csproj|solutionrelative:game.desktop\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F92680C8-9BFD-44EF-A53D-22C8268190D0}|Game.Desktop\\Game.Desktop.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.desktop\\desktopwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F92680C8-9BFD-44EF-A53D-22C8268190D0}|Game.Desktop\\Game.Desktop.csproj|solutionrelative:game.desktop\\desktopwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9436F12A-EA1A-428A-B1F6-F7AE4351AA31}|Game.Common\\Game.Common.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.common\\windowing\\swapchainsourceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9436F12A-EA1A-428A-B1F6-F7AE4351AA31}|Game.Common\\Game.Common.csproj|solutionrelative:game.common\\windowing\\swapchainsourceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F92680C8-9BFD-44EF-A53D-22C8268190D0}|Game.Desktop\\Game.Desktop.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.desktop\\game.desktop.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{F92680C8-9BFD-44EF-A53D-22C8268190D0}|Game.Desktop\\Game.Desktop.csproj|solutionrelative:game.desktop\\game.desktop.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9436F12A-EA1A-428A-B1F6-F7AE4351AA31}|Game.Common\\Game.Common.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.common\\windowing\\abstractwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9436F12A-EA1A-428A-B1F6-F7AE4351AA31}|Game.Common\\Game.Common.csproj|solutionrelative:game.common\\windowing\\abstractwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4F57BCAD-A141-4F7D-B24B-0F572756F09B}|Game.Graphics\\Game.Graphics.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.graphics\\game.graphics.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{4F57BCAD-A141-4F7D-B24B-0F572756F09B}|Game.Graphics\\Game.Graphics.csproj|solutionrelative:game.graphics\\game.graphics.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6E796FE-3606-90F3-964E-FB9FC248C429}|Game\\Game.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game\\game.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{B6E796FE-3606-90F3-964E-FB9FC248C429}|Game\\Game.csproj|solutionrelative:game\\game.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,15 +58,106 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game\\Class1.cs",
-              "RelativeDocumentMoniker": "Game\\Class1.cs",
-              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game\\Class1.cs",
-              "RelativeToolTip": "Game\\Class1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAXAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "SwapchainSourceExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Common\\Windowing\\SwapchainSourceExtensions.cs",
+              "RelativeDocumentMoniker": "Game.Common\\Windowing\\SwapchainSourceExtensions.cs",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Common\\Windowing\\SwapchainSourceExtensions.cs",
+              "RelativeToolTip": "Game.Common\\Windowing\\SwapchainSourceExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-24T09:37:55.977Z",
+              "WhenOpened": "2026-01-24T13:59:00.548Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Game.Graphics",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Graphics\\Game.Graphics.csproj",
+              "RelativeDocumentMoniker": "Game.Graphics\\Game.Graphics.csproj",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Graphics\\Game.Graphics.csproj",
+              "RelativeToolTip": "Game.Graphics\\Game.Graphics.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-01-24T13:23:42.616Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GraphicsRenderer.cs",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Graphics\\GraphicsRenderer.cs",
+              "RelativeDocumentMoniker": "Game.Graphics\\GraphicsRenderer.cs",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Graphics\\GraphicsRenderer.cs",
+              "RelativeToolTip": "Game.Graphics\\GraphicsRenderer.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAIwDgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-24T12:55:38.745Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Game.Desktop",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Desktop\\Game.Desktop.csproj",
+              "RelativeDocumentMoniker": "Game.Desktop\\Game.Desktop.csproj",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Desktop\\Game.Desktop.csproj",
+              "RelativeToolTip": "Game.Desktop\\Game.Desktop.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-01-24T12:55:07.048Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DesktopWindow.cs",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Desktop\\DesktopWindow.cs",
+              "RelativeDocumentMoniker": "Game.Desktop\\DesktopWindow.cs",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Desktop\\DesktopWindow.cs",
+              "RelativeToolTip": "Game.Desktop\\DesktopWindow.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAowDwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-24T11:49:08.111Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AbstractWindow.cs",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Common\\Windowing\\AbstractWindow.cs",
+              "RelativeDocumentMoniker": "Game.Common\\Windowing\\AbstractWindow.cs",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Common\\Windowing\\AbstractWindow.cs",
+              "RelativeToolTip": "Game.Common\\Windowing\\AbstractWindow.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-24T11:38:47.654Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Desktop\\Program.cs",
+              "RelativeDocumentMoniker": "Game.Desktop\\Program.cs",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Desktop\\Program.cs",
+              "RelativeToolTip": "Game.Desktop\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-24T11:36:19.41Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Game",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game\\Game.csproj",
+              "RelativeDocumentMoniker": "Game\\Game.csproj",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game\\Game.csproj",
+              "RelativeToolTip": "Game\\Game.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-01-24T12:54:48.961Z",
               "EditorCaption": ""
             }
           ]
