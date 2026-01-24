@@ -3,8 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B6E796FE-3606-90F3-964E-FB9FC248C429}|Game\\Game.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6E796FE-3606-90F3-964E-FB9FC248C429}|Game\\Game.csproj|solutionrelative:game\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E024CEDE-4D60-4AE9-850A-64ECA42C0F56}|Game.Mobile\\Game.Mobile.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.mobile\\gettingstarted.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E024CEDE-4D60-4AE9-850A-64ECA42C0F56}|Game.Mobile\\Game.Mobile.csproj|solutionrelative:game.mobile\\gettingstarted.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E024CEDE-4D60-4AE9-850A-64ECA42C0F56}|Game.Mobile\\Game.Mobile.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.mobile\\main.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{E024CEDE-4D60-4AE9-850A-64ECA42C0F56}|Game.Mobile\\Game.Mobile.csproj|solutionrelative:game.mobile\\main.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E024CEDE-4D60-4AE9-850A-64ECA42C0F56}|Game.Mobile\\Game.Mobile.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.mobile\\main.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E024CEDE-4D60-4AE9-850A-64ECA42C0F56}|Game.Mobile\\Game.Mobile.csproj|solutionrelative:game.mobile\\main.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E024CEDE-4D60-4AE9-850A-64ECA42C0F56}|Game.Mobile\\Game.Mobile.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.mobile\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E024CEDE-4D60-4AE9-850A-64ECA42C0F56}|Game.Mobile\\Game.Mobile.csproj|solutionrelative:game.mobile\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E024CEDE-4D60-4AE9-850A-64ECA42C0F56}|Game.Mobile\\Game.Mobile.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.mobile\\game.mobile.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{E024CEDE-4D60-4AE9-850A-64ECA42C0F56}|Game.Mobile\\Game.Mobile.csproj|solutionrelative:game.mobile\\game.mobile.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E024CEDE-4D60-4AE9-850A-64ECA42C0F56}|Game.Mobile\\Game.Mobile.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.mobile\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{E024CEDE-4D60-4AE9-850A-64ECA42C0F56}|Game.Mobile\\Game.Mobile.csproj|solutionrelative:game.mobile\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E024CEDE-4D60-4AE9-850A-64ECA42C0F56}|Game.Mobile\\Game.Mobile.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.mobile\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{E024CEDE-4D60-4AE9-850A-64ECA42C0F56}|Game.Mobile\\Game.Mobile.csproj|solutionrelative:game.mobile\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E024CEDE-4D60-4AE9-850A-64ECA42C0F56}|Game.Mobile\\Game.Mobile.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.mobile\\resources\\raw\\aboutassets.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{E024CEDE-4D60-4AE9-850A-64ECA42C0F56}|Game.Mobile\\Game.Mobile.csproj|solutionrelative:game.mobile\\resources\\raw\\aboutassets.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6E796FE-3606-90F3-964E-FB9FC248C429}|Game\\Game.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game\\game.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{B6E796FE-3606-90F3-964E-FB9FC248C429}|Game\\Game.csproj|solutionrelative:game\\game.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,14 +63,118 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game\\Class1.cs",
-              "RelativeDocumentMoniker": "Game\\Class1.cs",
-              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game\\Class1.cs",
-              "RelativeToolTip": "Game\\Class1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAXAAAAAAAAAA==",
+              "Title": "GettingStarted.cs",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Mobile\\GettingStarted.cs",
+              "RelativeDocumentMoniker": "Game.Mobile\\GettingStarted.cs",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Mobile\\GettingStarted.cs",
+              "RelativeToolTip": "Game.Mobile\\GettingStarted.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAHMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-24T09:37:55.977Z",
+              "WhenOpened": "2026-01-24T11:16:26.312Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Main.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Mobile\\Main.xaml.cs",
+              "RelativeDocumentMoniker": "Game.Mobile\\Main.xaml.cs",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Mobile\\Main.xaml.cs",
+              "RelativeToolTip": "Game.Mobile\\Main.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-24T10:04:04.07Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AboutAssets.txt",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Mobile\\Resources\\Raw\\AboutAssets.txt",
+              "RelativeDocumentMoniker": "Game.Mobile\\Resources\\Raw\\AboutAssets.txt",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Mobile\\Resources\\Raw\\AboutAssets.txt",
+              "RelativeToolTip": "Game.Mobile\\Resources\\Raw\\AboutAssets.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-01-24T10:03:41.999Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Mobile\\App.xaml",
+              "RelativeDocumentMoniker": "Game.Mobile\\App.xaml",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Mobile\\App.xaml",
+              "RelativeToolTip": "Game.Mobile\\App.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-24T10:03:08.927Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AppShell.xaml",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Mobile\\AppShell.xaml",
+              "RelativeDocumentMoniker": "Game.Mobile\\AppShell.xaml",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Mobile\\AppShell.xaml",
+              "RelativeToolTip": "Game.Mobile\\AppShell.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-24T10:03:01.847Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Main.xaml",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Mobile\\Main.xaml",
+              "RelativeDocumentMoniker": "Game.Mobile\\Main.xaml",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Mobile\\Main.xaml",
+              "RelativeToolTip": "Game.Mobile\\Main.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-24T10:02:33.426Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MauiProgram.cs",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Mobile\\MauiProgram.cs",
+              "RelativeDocumentMoniker": "Game.Mobile\\MauiProgram.cs",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Mobile\\MauiProgram.cs",
+              "RelativeToolTip": "Game.Mobile\\MauiProgram.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-24T10:02:00.317Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Game.Mobile",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Mobile\\Game.Mobile.csproj",
+              "RelativeDocumentMoniker": "Game.Mobile\\Game.Mobile.csproj",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Mobile\\Game.Mobile.csproj",
+              "RelativeToolTip": "Game.Mobile\\Game.Mobile.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-01-24T10:00:35.556Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Game",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game\\Game.csproj",
+              "RelativeDocumentMoniker": "Game\\Game.csproj",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game\\Game.csproj",
+              "RelativeToolTip": "Game\\Game.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-01-24T09:43:35.99Z",
               "EditorCaption": ""
             }
           ]
