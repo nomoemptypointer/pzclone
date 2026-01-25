@@ -1,4 +1,5 @@
 ﻿using SDL3;
+using Veldrid;
 using static SDL3.SDL;
 
 namespace Game.Desktop
@@ -9,16 +10,18 @@ namespace Game.Desktop
         /// Creates a Veldrid SwapchainSource from an SDL3 window.
         /// Note: currently only Windows (Win32) is implemented.
         /// </summary>
-        public static Veldrid.SwapchainSource CreateSDL(nint sdlWindow)
+        public static SwapchainSource CreateSDL(nint sdlWindow)
         {
             var props = GetWindowProperties(sdlWindow);
 
             // TODO: Implement Linux and MacOS
-            nint hwnd = GetPointerProperty(props, "SDL_PROP_WINDOW_WIN32_HWND_POINTER", nint.Zero);
-            nint hinstance = GetPointerProperty(props, "SDL_PROP_WINDOW_WIN32_INSTANCE_POINTER", nint.Zero);
+            nint hwnd = GetPointerProperty(props, Props.WindowWin32HWNDPointer, nint.Zero);
+            nint hinstance = GetPointerProperty(props, Props.WindowWin32InstancePointer, nint.Zero);
 
+            if (hwnd == nint.Zero)
+                throw new Exception($"SDL HWND is null");
 
-            return Veldrid.SwapchainSource.CreateWin32(hwnd, hinstance);
+            return SwapchainSource.CreateWin32(hwnd, hinstance);
         }
     }
 }

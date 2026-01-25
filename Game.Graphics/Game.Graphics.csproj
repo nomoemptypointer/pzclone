@@ -1,18 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Veldrid.RenderDoc" Version="1.0.1" />
-    <PackageReference Include="Veldrid.SPIRV" Version="1.0.15" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Veldrid.RenderDoc" Version="1.0.1" />
+        <PackageReference Include="Veldrid.SPIRV" Version="1.0.15" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Game.Common\Game.Common.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Game.Common\Game.Common.csproj" />
+    </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 ﻿using Game.Graphics;
+using Veldrid;
 
 namespace Game.Desktop
 {
@@ -6,9 +7,9 @@ namespace Game.Desktop
     {
         static void Main()
         {
-            GraphicsRenderer graphicsRenderer = new();
-            DesktopWindow dw = new(graphicsRenderer.GraphicsDevice);
-            dw.Run();
+            DesktopWindow dw = new(GraphicsBackend.Vulkan);
+            GraphicsRenderer graphicsRenderer = new(dw);
+            dw.Run(graphicsRenderer.GraphicsDevice);
         }
     }
 }

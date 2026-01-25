@@ -1,8 +1,11 @@
-﻿namespace Game.Common.Windowing
+﻿using Veldrid;
+
+namespace Game.Common.Windowing
 {
     public abstract class AbstractWindow
     {
         public static AbstractWindow Singleton { get; private set; }
+        public nint BaseSDL3 { get; protected set; }
 
         public AbstractWindow()
         {
@@ -16,6 +19,6 @@
             }
         }
 
-        public abstract void Run();
+        public abstract void Run(GraphicsDevice gd);
     }
 }

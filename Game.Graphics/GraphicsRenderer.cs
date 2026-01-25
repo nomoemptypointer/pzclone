@@ -6,11 +6,28 @@ namespace Game.Graphics
 {
     public class GraphicsRenderer
     {
+        public static GraphicsRenderer Singleton { get; private set; }
         public GraphicsDevice GraphicsDevice { get; private set; }
-        public Swapchain MainSwapchain { get; private set; }
+        public AbstractWindow Window { get; private set; }
 
-        public GraphicsRenderer(GraphicsBackend backend = GraphicsBackend.Vulkan, uint width = 1280, uint height = 720)
+        private static readonly Random _rng = new();
+
+        public GraphicsRenderer(AbstractWindow window, GraphicsBackend backend = GraphicsBackend.Vulkan)
         {
+            if (Singleton == null)
+                Singleton = this;
+            else
+                throw new Exception();
+
+            Window = window;
+            CreateGraphicsDevice();
+        }
+
+        public void CreateGraphicsDevice(bool recreate = false)
+        {
+            if (recreate)
+                GraphicsDevice.Dispose();
+
             var options = new GraphicsDeviceOptions(
                 debug: true,
                 swapchainDepthFormat: null, // no depth buffer by default
@@ -18,57 +35,62 @@ namespace Game.Graphics
                 resourceBindingModel: ResourceBindingModel.Improved
             );
 
-            GraphicsDevice = GraphicsDevice.CreateVulkan(options);
-            MainSwapchain = GraphicsDevice.MainSwapchain;
-        }
+            var source = SwapchainSourceExtensions.CreateSDL(Window.BaseSDL3);
 
-        public void BindSdlWindow(nint sdlWindow) // This is dumb
-        {
-            var source = SwapchainSourceExtensions.CreateSDL(sdlWindow);
-
-            var scDesc = new SwapchainDescription(
+            var swapchainDesc = new SwapchainDescription(
                 source,
-                1920, // TODO: This shouldn't be like this
+                1920,
                 1080,
                 null,
-                true
+                true // vsync
             );
 
-            MainSwapchain = GraphicsDevice.ResourceFactory.CreateSwapchain(scDesc);
+            GraphicsDevice = GraphicsDevice.CreateVulkan(
+                options,
+                swapchainDesc
+            );
         }
 
         /// <summary>
         /// Presents the current frame.
         /// </summary>
-        public void Present()
-        {
-            GraphicsDevice.SwapBuffers(MainSwapchain);
-        }
+        public void Present() => GraphicsDevice.SwapBuffers(GraphicsDevice.MainSwapchain);
 
         /// <summary>
         /// Resizes the main swapchain.
         /// </summary>
         public void Resize(uint width, uint height)
         {
+            if (width == 0 || height == 0)
+                return; // Prevent backend from blowing up
+
             GraphicsDevice.ResizeMainWindow(width, height);
         }
 
-        public static void RenderTest(GraphicsRenderer renderer) // This is dumb
+        public void RenderTest()
         {
-            var gd = renderer.GraphicsDevice;
-            var sc = renderer.MainSwapchain;
+            var gd = GraphicsDevice;
+            var sc = gd.MainSwapchain;
 
             using var cl = gd.ResourceFactory.CreateCommandList();
+
+            // Random color each frame
+            var randomColor = new RgbaFloat(
+                (float)_rng.NextDouble(),
+                (float)_rng.NextDouble(),
+                (float)_rng.NextDouble(),
+                1f
+            );
 
             cl.Begin();
 
             cl.SetFramebuffer(sc.Framebuffer);
-            cl.ClearColorTarget(0, RgbaFloat.CornflowerBlue);
+            cl.ClearColorTarget(0, randomColor);
 
             cl.End();
 
             gd.SubmitCommands(cl);
-            renderer.Present();
+            gd.SwapBuffers(sc);
         }
     }
 }
