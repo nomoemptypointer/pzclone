@@ -1,4 +1,7 @@
 <Solution>
+  <Project Path="Game.Android/Game.Android.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
   <Project Path="Game.Common/Game.Common.csproj" Id="9436f12a-ea1a-428a-b1f6-f7ae4351aa31" />
   <Project Path="Game.Desktop/Game.Desktop.csproj" Id="f92680c8-9bfd-44ef-a53d-22c8268190d0" />
   <Project Path="Game.Graphics/Game.Graphics.csproj" Id="4f57bcad-a141-4f7d-b24b-0f572756f09b" />

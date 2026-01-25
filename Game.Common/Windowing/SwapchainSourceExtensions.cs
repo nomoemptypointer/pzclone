@@ -1,4 +1,5 @@
 ﻿using SDL3;
+using System.Runtime.InteropServices;
 using Veldrid;
 using static SDL3.SDL;
 
@@ -12,16 +13,32 @@ namespace Game.Desktop
         /// </summary>
         public static SwapchainSource CreateSDL(nint sdlWindow)
         {
-            var props = GetWindowProperties(sdlWindow);
+            if (OperatingSystem.IsWindows())
+            {
+                var props = GetWindowProperties(sdlWindow);
 
-            // TODO: Implement Linux and MacOS
-            nint hwnd = GetPointerProperty(props, Props.WindowWin32HWNDPointer, nint.Zero);
-            nint hinstance = GetPointerProperty(props, Props.WindowWin32InstancePointer, nint.Zero);
+                nint hwnd = GetPointerProperty(props, Props.WindowWin32HWNDPointer, nint.Zero);
+                nint hinstance = GetPointerProperty(props, Props.WindowWin32InstancePointer, nint.Zero);
 
-            if (hwnd == nint.Zero)
-                throw new Exception($"SDL HWND is null");
+                if (hwnd == nint.Zero)
+                    throw new Exception("SDL HWND is null");
 
-            return SwapchainSource.CreateWin32(hwnd, hinstance);
+                return SwapchainSource.CreateWin32(hwnd, hinstance);
+            }
+            if (OperatingSystem.IsAndroid())
+            {
+                var props = GetWindowProperties(sdlWindow);
+
+                nint windowPtr = GetPointerProperty(props, Props.WindowAndroidWindowPointer, nint.Zero); // is always null
+                nint surfacePtr = GetPointerProperty(props, Props.WindowAndroidSurfacePointer, nint.Zero); // is always null
+
+                if (windowPtr == nint.Zero)
+                    throw new Exception("SDL windowPtr is null");
+
+                return SwapchainSource.CreateAndroidSurface(surfacePtr, windowPtr);
+            }
+
+            throw new PlatformNotSupportedException("Unsupported platform.");
         }
     }
 }
