@@ -12,11 +12,14 @@ namespace Game.Desktop
             Core.Game game = new();
             game.Initialize();
 
-            dw.Run(graphicsRenderer.GraphicsDevice, () =>
-            {
-                game.Update(game.DeltaTime);
-                game.Render();
-            });
+            dw.Tick(graphicsRenderer.GraphicsDevice); // Needs to be called by game.Run();
+            game.TargetFramesPerSecond = double.MaxValue;
+            game.SetRenderAction(graphicsRenderer.Render);
+
+            game.Run(
+                () => dw.Tick(graphicsRenderer.GraphicsDevice),
+                () => Console.WriteLine($"DeltaTime: {game.DeltaTime:F4}s") // example
+            );
 
             game.Shutdown();
         }

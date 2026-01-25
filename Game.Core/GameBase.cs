@@ -1,12 +1,19 @@
 ﻿using Game.Core.Diagnostics;
+using Game.Core.ECS;
 using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Game.Core
 {
     public abstract class GameBase
     {
-        public bool Initialized { get; protected set; } = false;
+        public bool Initialized { get; private set; } = false;
         public bool Running { get; private set; } = false;
+        public SystemRegistry SystemRegistry { get; } = new SystemRegistry();
+
+        private readonly List<GameObject> _gameObjects = [];
+        private readonly List<GameObject> _destroyList = [];
+        private Action _renderAction;
 
         public double TargetFrameTime
         {
@@ -37,28 +44,67 @@ namespace Game.Core
 
         protected GameBase()
         {
-            
+            Console.WriteLine("protected GameBase ctor called");
+            SystemRegistry.Register(new GameObjectQuerySystem(_gameObjects));
+            GameObject.InternalConstructed += OnGameObjectConstructed;
+            GameObject.InternalDestroyRequested += OnGameObjectDestroyRequested;
+            GameObject.InternalDestroyCommitted += OnGameObjectDestroyCommitted;
         }
 
         public abstract void Initialize();
-        public abstract void Update(double deltaTime);
-        public abstract void Render();
         public abstract void Shutdown();
 
         protected void LogException(Exception e) => CrashLogHelper.LogUnhandledException(e, this);
 
-        // Main game loop
-        public void Run()
+        protected void FlushDeletedObjects()
         {
+            foreach (GameObject go in _destroyList)
+                go.CommitDestroy();
+            _destroyList.Clear();
+        }
+
+        private void OnGameObjectConstructed(GameObject go)
+        {
+            go.SetRegistry(SystemRegistry);
+            lock (_gameObjects)
+                _gameObjects.Add(go);
+        }
+
+        private void OnGameObjectDestroyRequested(GameObject go)
+        {
+            _destroyList.Add(go);
+        }
+
+        private void OnGameObjectDestroyCommitted(GameObject go)
+        {
+            lock (_gameObjects)
+                _gameObjects.Remove(go);
+        }
+
+        public void AnnounceInitialized() => Initialized = true;
+
+        public void SetRenderAction(Action action)
+        {
+            if (_renderAction != null) throw new Exception("Render action is already set");
+            _renderAction = action;
+        }
+
+        // Main game loop
+        public void Run(params Action[] perFrameActions)
+        {
+#if RELEASE
             try
             {
-                Initialize();
+#endif
+            Initialize();
+#if RELEASE
             }
             catch (Exception e)
             {
                 LogException(e);
                 return;
             }
+#endif
 
             Running = true;
             _stopwatch = Stopwatch.StartNew();
@@ -67,28 +113,52 @@ namespace Game.Core
             {
                 double frameStart = _stopwatch.Elapsed.TotalSeconds;
 
-                // Calculate deltaTime (variable)
                 DeltaTime = frameStart - _accumulatedTime;
                 _accumulatedTime = frameStart;
 
-                // Update with variable deltaTime
+#if RELEASE
                 try
                 {
-                    Update(DeltaTime);
+#endif
+                FlushDeletedObjects();
+
+
+                    var systemEnumerator = SystemRegistry.GetSystemsEnumerator();
+                    while (systemEnumerator.MoveNext())
+                    {
+                        var kvp = systemEnumerator.Current;
+                        GameSystem system = kvp.Value;
+                        system.Update(DeltaTime);
+                    }
+#if RELEASE
                 }
                 catch (Exception e)
                 {
                     LogException(e);
                 }
+#endif
 
                 // Render
                 try
                 {
-                    Render();
+                    _renderAction?.Invoke();
                 }
                 catch (Exception e)
                 {
                     LogException(e);
+                }
+
+                // Run user-provided per-frame actions (like rendering)
+                foreach (var action in perFrameActions)
+                {
+                    try
+                    {
+                        action?.Invoke();
+                    }
+                    catch (Exception e)
+                    {
+                        LogException(e);
+                    }
                 }
 
                 double frameEnd = _stopwatch.Elapsed.TotalSeconds;

@@ -11,6 +11,7 @@ namespace Game.Desktop
     public class DesktopWindow : AbstractWindow
     {
         private GraphicsDevice _gd;
+        private bool shown;
 
         public DesktopWindow(GraphicsBackend graphicsBackend)
                         : base(CreateSdlWindow(graphicsBackend))
@@ -50,7 +51,7 @@ namespace Game.Desktop
             return window;
         }
 
-        public override void Run(GraphicsDevice gd, Action perFrameAction)
+        public override void Tick(GraphicsDevice gd)
         {
             if (_gd == null) // TODO: This might be slow
                 GraphicsRenderer.Singleton.CreateGraphicsDevice();
@@ -59,28 +60,27 @@ namespace Game.Desktop
 
             while (!Core.Game.Instance.Initialized)
                 Thread.Sleep(10);
-            Show();
+            if (!shown)
+                Show();
 
-            while (true)
+            while (PollEvent(out var e))
             {
-                while (PollEvent(out var e))
+                if (e.Type == (uint)EventType.WindowResized)
                 {
-                    if (e.Type == (uint)EventType.WindowResized)
-                    {
-                        int width = e.Window.Data1;
-                        int height = e.Window.Data2;
-                        GraphicsRenderer.Singleton.Resize((uint)width, (uint)height);
-                    }
+                    int width = e.Window.Data1;
+                    int height = e.Window.Data2;
+                    GraphicsRenderer.Singleton.Resize((uint)width, (uint)height);
                 }
-
-                perFrameAction?.Invoke();
-                GraphicsRenderer.Singleton.RenderTest();
-
-                _gd.SwapBuffers();
-                _gd.WaitForIdle();
             }
+
+            //_gd.SwapBuffers();
+            _gd.WaitForIdle();
         }
 
-        public override void Show() => ShowWindow(BaseSDL3);
+        public override void Show()
+        {
+            shown = true;
+            ShowWindow(BaseSDL3);
+        }
     }
 }

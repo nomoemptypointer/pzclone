@@ -19,7 +19,7 @@ namespace Game.Common.Windowing
             Singleton = this;
         }
 
-        public abstract void Run(GraphicsDevice gd, Action perFrameAction);
+        public abstract void Tick(GraphicsDevice gd);
 
         public abstract void Show();
     }

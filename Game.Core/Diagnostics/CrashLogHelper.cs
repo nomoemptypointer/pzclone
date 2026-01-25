@@ -11,6 +11,8 @@ namespace Game.Core.Diagnostics
                 fs.WriteLine(RuntimeInformation.OSDescription + "\n");
                 fs.WriteLine(e.ToString());
             }
+
+            Environment.Exit(1);
         }
     }
 }
