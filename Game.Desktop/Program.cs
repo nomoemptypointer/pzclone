@@ -9,18 +9,12 @@ namespace Game.Desktop
         {
             DesktopWindow dw = new(GraphicsBackend.Vulkan);
             GraphicsRenderer graphicsRenderer = new(dw);
-            Game game = new();
+            Core.Game game = new();
             game.Initialize();
 
             dw.Run(graphicsRenderer.GraphicsDevice, () =>
             {
-                // This lambda is called every frame by the window
-                float deltaTime = graphicsRenderer.DeltaTime; // Get time between frames
-
-                // Update game logic
-                game.Update(deltaTime);
-
-                // Render the game
+                game.Update(game.DeltaTime);
                 game.Render();
             });
 

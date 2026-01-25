@@ -1,10 +1,11 @@
-﻿using System.Diagnostics;
-using Game.Common;
+﻿using Game.Core.Diagnostics;
+using System.Diagnostics;
 
-namespace Game
+namespace Game.Core
 {
     public abstract class GameBase
     {
+        public bool Initialized { get; protected set; } = false;
         public bool Running { get; private set; } = false;
 
         public double TargetFrameTime
@@ -27,6 +28,8 @@ namespace Game
                 _targetFrameTime = 1.0 / value;
             }
         }
+
+        public double DeltaTime { get; private set; } = 0;
 
         private Stopwatch _stopwatch;
         private double _accumulatedTime;
@@ -59,29 +62,26 @@ namespace Game
 
             Running = true;
             _stopwatch = Stopwatch.StartNew();
-            _accumulatedTime = 0f;
 
             while (Running)
             {
-                float deltaTime = (float)_stopwatch.Elapsed.TotalSeconds;
-                _stopwatch.Restart();
+                double frameStart = _stopwatch.Elapsed.TotalSeconds;
 
-                _accumulatedTime += deltaTime;
+                // Calculate deltaTime (variable)
+                DeltaTime = frameStart - _accumulatedTime;
+                _accumulatedTime = frameStart;
 
-                // Fixed update step
-                while (_accumulatedTime >= _targetFrameTime)
+                // Update with variable deltaTime
+                try
                 {
-                    try
-                    {
-                        Update(_targetFrameTime);
-                    }
-                    catch (Exception e)
-                    {
-                        LogException(e);
-                    }
-                    _accumulatedTime -= _targetFrameTime;
+                    Update(DeltaTime);
+                }
+                catch (Exception e)
+                {
+                    LogException(e);
                 }
 
+                // Render
                 try
                 {
                     Render();
@@ -89,6 +89,17 @@ namespace Game
                 catch (Exception e)
                 {
                     LogException(e);
+                }
+
+                double frameEnd = _stopwatch.Elapsed.TotalSeconds;
+                double frameTime = frameEnd - frameStart;
+                double sleepTime = TargetFrameTime - frameTime;
+
+                if (sleepTime > 0)
+                {
+                    int sleepMs = (int)(sleepTime * 1000);
+                    if (sleepMs > 0)
+                        Thread.Sleep(sleepMs);
                 }
             }
 

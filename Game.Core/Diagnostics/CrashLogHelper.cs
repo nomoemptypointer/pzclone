@@ -1,7 +1,6 @@
 ﻿using System.Runtime.InteropServices;
-using Vortice.DXGI;
 
-namespace Game.Common
+namespace Game.Core.Diagnostics
 {
     public static class CrashLogHelper
     {

@@ -1,7 +1,9 @@
 ﻿using Game.Common.Windowing;
+using Game.Core;
 using Game.Graphics;
 using SDL3;
 using Veldrid;
+using Vulkan.Xlib;
 using static SDL3.SDL;
 
 namespace Game.Desktop
@@ -45,7 +47,6 @@ namespace Game.Desktop
                 flags
             );
 
-            ShowWindow(window);
             return window;
         }
 
@@ -55,6 +56,10 @@ namespace Game.Desktop
                 GraphicsRenderer.Singleton.CreateGraphicsDevice();
 
             _gd = GraphicsRenderer.Singleton.GraphicsDevice;
+
+            while (!Core.Game.Instance.Initialized)
+                Thread.Sleep(10);
+            Show();
 
             while (true)
             {
@@ -75,5 +80,7 @@ namespace Game.Desktop
                 _gd.WaitForIdle();
             }
         }
+
+        public override void Show() => ShowWindow(BaseSDL3);
     }
 }

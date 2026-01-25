@@ -1,4 +1,4 @@
-﻿namespace Game
+﻿namespace Game.Core
 {
     public class Game : GameBase
     {
@@ -14,7 +14,7 @@
 
         public override void Initialize()
         {
-            // TODO: load resources, setup game state
+            Initialized = true; // Signals that the game has been initialized and should handle window stuff TODO: Method is better for this
         }
 
         public override void Update(double deltaTime)
