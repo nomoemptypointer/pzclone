@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9436F12A-EA1A-428A-B1F6-F7AE4351AA31}|Game.Common\\Game.Common.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.common\\windowing\\swapchainsourceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9436F12A-EA1A-428A-B1F6-F7AE4351AA31}|Game.Common\\Game.Common.csproj|solutionrelative:game.common\\windowing\\swapchainsourceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{46285107-3CFA-45CB-3C84-A797B4108966}|Game.Android\\Game.Android.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.android\\androidwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{46285107-3CFA-45CB-3C84-A797B4108966}|Game.Android\\Game.Android.csproj|solutionrelative:game.android\\androidwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -19,16 +15,20 @@
       "RelativeMoniker": "D:0:0:{F92680C8-9BFD-44EF-A53D-22C8268190D0}|Game.Desktop\\Game.Desktop.csproj|solutionrelative:game.desktop\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{46285107-3CFA-45CB-3C84-A797B4108966}|Game.Android\\Game.Android.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.android\\game.android.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{46285107-3CFA-45CB-3C84-A797B4108966}|Game.Android\\Game.Android.csproj|solutionrelative:game.android\\game.android.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{9436F12A-EA1A-428A-B1F6-F7AE4351AA31}|Game.Common\\Game.Common.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.common\\windowing\\abstractwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9436F12A-EA1A-428A-B1F6-F7AE4351AA31}|Game.Common\\Game.Common.csproj|solutionrelative:game.common\\windowing\\abstractwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F92680C8-9BFD-44EF-A53D-22C8268190D0}|Game.Desktop\\Game.Desktop.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.desktop\\desktopwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F92680C8-9BFD-44EF-A53D-22C8268190D0}|Game.Desktop\\Game.Desktop.csproj|solutionrelative:game.desktop\\desktopwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F92680C8-9BFD-44EF-A53D-22C8268190D0}|Game.Desktop\\Game.Desktop.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.desktop\\game.desktop.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{F92680C8-9BFD-44EF-A53D-22C8268190D0}|Game.Desktop\\Game.Desktop.csproj|solutionrelative:game.desktop\\game.desktop.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{4F57BCAD-A141-4F7D-B24B-0F572756F09B}|Game.Graphics\\Game.Graphics.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.graphics\\graphicsrenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F57BCAD-A141-4F7D-B24B-0F572756F09B}|Game.Graphics\\Game.Graphics.csproj|solutionrelative:game.graphics\\graphicsrenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9436F12A-EA1A-428A-B1F6-F7AE4351AA31}|Game.Common\\Game.Common.csproj|c:\\users\\mono\\documents\\github\\pzclone\\game.common\\windowing\\swapchainsourceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9436F12A-EA1A-428A-B1F6-F7AE4351AA31}|Game.Common\\Game.Common.csproj|solutionrelative:game.common\\windowing\\swapchainsourceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,17 +38,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "MainActivity.cs",
               "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Android\\MainActivity.cs",
               "RelativeDocumentMoniker": "Game.Android\\MainActivity.cs",
               "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Android\\MainActivity.cs",
               "RelativeToolTip": "Game.Android\\MainActivity.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAQwDoAAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-25T16:20:36.533Z",
               "IsPinned": true,
@@ -68,80 +68,80 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SwapchainSourceExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Common\\Windowing\\SwapchainSourceExtensions.cs",
-              "RelativeDocumentMoniker": "Game.Common\\Windowing\\SwapchainSourceExtensions.cs",
-              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Common\\Windowing\\SwapchainSourceExtensions.cs",
-              "RelativeToolTip": "Game.Common\\Windowing\\SwapchainSourceExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T16:36:38.088Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AndroidWindow.cs",
-              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Android\\AndroidWindow.cs",
-              "RelativeDocumentMoniker": "Game.Android\\AndroidWindow.cs",
-              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Android\\AndroidWindow.cs",
-              "RelativeToolTip": "Game.Android\\AndroidWindow.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T16:32:37.615Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Desktop\\Program.cs",
               "RelativeDocumentMoniker": "Game.Desktop\\Program.cs",
               "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Desktop\\Program.cs",
               "RelativeToolTip": "Game.Desktop\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T16:30:08.926Z",
+              "WhenOpened": "2026-01-25T19:33:04.464Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Game.Desktop",
-              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Desktop\\Game.Desktop.csproj",
-              "RelativeDocumentMoniker": "Game.Desktop\\Game.Desktop.csproj",
-              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Desktop\\Game.Desktop.csproj",
-              "RelativeToolTip": "Game.Desktop\\Game.Desktop.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-01-25T16:28:36.462Z",
+              "DocumentIndex": 3,
+              "Title": "AbstractWindow.cs",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Common\\Windowing\\AbstractWindow.cs",
+              "RelativeDocumentMoniker": "Game.Common\\Windowing\\AbstractWindow.cs",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Common\\Windowing\\AbstractWindow.cs",
+              "RelativeToolTip": "Game.Common\\Windowing\\AbstractWindow.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T19:16:56.949Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Game.Android",
-              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Android\\Game.Android.csproj",
-              "RelativeDocumentMoniker": "Game.Android\\Game.Android.csproj",
-              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Android\\Game.Android.csproj",
-              "RelativeToolTip": "Game.Android\\Game.Android.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-01-25T16:28:34.834Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "DesktopWindow.cs",
               "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Desktop\\DesktopWindow.cs",
               "RelativeDocumentMoniker": "Game.Desktop\\DesktopWindow.cs",
               "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Desktop\\DesktopWindow.cs",
               "RelativeToolTip": "Game.Desktop\\DesktopWindow.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAvwC8AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T16:25:59.8Z",
+              "WhenOpened": "2026-01-25T18:38:46.766Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GraphicsRenderer.cs",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Graphics\\GraphicsRenderer.cs",
+              "RelativeDocumentMoniker": "Game.Graphics\\GraphicsRenderer.cs",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Graphics\\GraphicsRenderer.cs",
+              "RelativeToolTip": "Game.Graphics\\GraphicsRenderer.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAcwEAAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T18:24:35.457Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SwapchainSourceExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Common\\Windowing\\SwapchainSourceExtensions.cs",
+              "RelativeDocumentMoniker": "Game.Common\\Windowing\\SwapchainSourceExtensions.cs",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Common\\Windowing\\SwapchainSourceExtensions.cs",
+              "RelativeToolTip": "Game.Common\\Windowing\\SwapchainSourceExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T18:23:28.876Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AndroidWindow.cs",
+              "DocumentMoniker": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Android\\AndroidWindow.cs",
+              "RelativeDocumentMoniker": "Game.Android\\AndroidWindow.cs",
+              "ToolTip": "C:\\Users\\mono\\Documents\\GitHub\\pzclone\\Game.Android\\AndroidWindow.cs",
+              "RelativeToolTip": "Game.Android\\AndroidWindow.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAwwBUAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T18:22:28.493Z",
               "EditorCaption": ""
             }
           ]

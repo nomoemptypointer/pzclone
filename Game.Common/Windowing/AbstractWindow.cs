@@ -4,19 +4,19 @@ namespace Game.Common.Windowing
 {
     public abstract class AbstractWindow
     {
-        public static AbstractWindow Singleton { get; private set; }
-        public nint BaseSDL3 { get; protected set; }
+        public static AbstractWindow Singleton { get; internal set; }
+        public nint BaseSDL3 { get; protected set; } = nint.Zero;
 
-        public AbstractWindow()
+        protected AbstractWindow(nint baseSdl3)
         {
-            if (Singleton == null)
-            {
-                Singleton = this;
-            }
-            else
-            {
+            if (baseSdl3 == 0)
+                throw new ArgumentException("Invalid SDL window handle.");
+
+            if (Singleton != null)
                 throw new Exception("Singleton already exists, there must be only one window instance.");
-            }
+
+            BaseSDL3 = baseSdl3;
+            Singleton = this;
         }
 
         public abstract void Run(GraphicsDevice gd);

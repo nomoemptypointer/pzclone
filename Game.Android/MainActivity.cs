@@ -28,32 +28,6 @@ namespace Game.Android
 
         protected override void Main()
         {
-            if (!SDL.Init(SDL.InitFlags.Video))
-            {
-                //SDL.LogError(SDL.LogCategory.System, $"SDL could not initialize: {SDL.GetError()}");
-                return;
-            }
-
-            WindowFlags flags = WindowFlags.Vulkan;
-
-            //switch (graphicsBackend)
-            //{
-            //    case GraphicsBackend.Vulkan:
-            //        flags |= WindowFlags.Vulkan;
-            //        break;
-            //    case GraphicsBackend.OpenGL:
-            //    case GraphicsBackend.OpenGLES:
-            //        flags |= WindowFlags.OpenGL;
-            //        break;
-            //    case GraphicsBackend.Metal:
-            //        flags |= WindowFlags.Metal;
-            //        break;
-            //    default:
-            //        break;
-            //}
-
-            SDL.CreateWindow("", 800, 600, flags);
-
             AndroidWindow aw = new();
             GraphicsRenderer graphicsRenderer = new(aw);
             aw.Run(graphicsRenderer.GraphicsDevice);

@@ -11,6 +11,9 @@ namespace Game.Desktop
         private GraphicsDevice _gd;
 
         public DesktopWindow(GraphicsBackend graphicsBackend)
+                        : base(CreateSdlWindow(graphicsBackend))
+        { }
+        private static nint CreateSdlWindow(GraphicsBackend graphicsBackend)
         {
             WindowFlags flags = WindowFlags.Hidden | WindowFlags.Resizable;
 
@@ -32,22 +35,26 @@ namespace Game.Desktop
 
             if (!Init(InitFlags.Video))
             {
-                return; // TODO: Throw exception
+                throw new Exception($"SDL could not initialize: {SDL.GetError()}");
             }
 
-            base.BaseSDL3 = CreateWindow(
+            var window = CreateWindow(
                 "",
                 1920,
                 1080,
                 flags
             );
 
-            ShowWindow(BaseSDL3);
+            ShowWindow(window);
+            return window;
         }
 
         public override void Run(GraphicsDevice gd)
         {
-            _gd = gd;
+            if (_gd == null) // TODO: This might be slow
+                GraphicsRenderer.Singleton.CreateGraphicsDevice();
+
+            _gd = GraphicsRenderer.Singleton.GraphicsDevice;
 
             while (true)
             {
