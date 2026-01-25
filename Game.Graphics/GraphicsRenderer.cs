@@ -1,5 +1,4 @@
 ﻿using Game.Common.Windowing;
-using Game.Desktop;
 using Veldrid;
 
 namespace Game.Graphics
@@ -20,13 +19,14 @@ namespace Game.Graphics
                 throw new Exception();
 
             Window = window;
-            CreateGraphicsDevice();
+            //CreateGraphicsDevice();
         }
 
         public void CreateGraphicsDevice(bool recreate = false)
         {
             if (recreate)
                 GraphicsDevice.Dispose();
+            // TODO: Check if gd is disposed and throw exception 
 
             var options = new GraphicsDeviceOptions(
                 debug: true,
@@ -35,7 +35,10 @@ namespace Game.Graphics
                 resourceBindingModel: ResourceBindingModel.Improved
             );
 
-            var source = SwapchainSourceExtensions.CreateSDL(Window.BaseSDL3);
+            if (Window.BaseSDL3 == 0)
+                throw new Exception("Window handle is null (CreateGraphicsDevice)"); // never gets fired because window exists
+
+            var source = SwapchainSourceExtensions.CreateSDL(Window.BaseSDL3); // passed Window.BaseSDL3 here exists but inside the method it is null/zero
 
             var swapchainDesc = new SwapchainDescription(
                 source,
@@ -50,11 +53,6 @@ namespace Game.Graphics
                 swapchainDesc
             );
         }
-
-        /// <summary>
-        /// Presents the current frame.
-        /// </summary>
-        public void Present() => GraphicsDevice.SwapBuffers(GraphicsDevice.MainSwapchain);
 
         /// <summary>
         /// Resizes the main swapchain.
