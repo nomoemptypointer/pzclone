@@ -45,7 +45,7 @@ namespace Game.Desktop
             ShowWindow(BaseSDL3);
         }
 
-        public override void Run(GraphicsDevice gd)
+        public override void Run(GraphicsDevice gd, Action perFrameAction)
         {
             _gd = gd;
 
@@ -61,6 +61,7 @@ namespace Game.Desktop
                     }
                 }
 
+                perFrameAction?.Invoke();
                 GraphicsRenderer.Singleton.RenderTest();
 
                 _gd.SwapBuffers();

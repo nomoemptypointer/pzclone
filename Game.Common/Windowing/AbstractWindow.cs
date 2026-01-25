@@ -19,6 +19,6 @@ namespace Game.Common.Windowing
             }
         }
 
-        public abstract void Run(GraphicsDevice gd);
+        public abstract void Run(GraphicsDevice gd, Action perFrameAction);
     }
 }
