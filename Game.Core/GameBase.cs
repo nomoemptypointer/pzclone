@@ -87,6 +87,7 @@ namespace Game.Core
         public void AnnounceInitialized()
         {
             Running = true;
+            RunLoop();
         }
 
         public void RunLoop()
