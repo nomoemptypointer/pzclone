@@ -1,10 +1,11 @@
-﻿using System.Diagnostics;
+﻿using Game.Core.ECS.Components;
+using System.Diagnostics;
 
 namespace Game.Core.ECS
 {
     public abstract class EcsComponent
     {
-        public EcsEntity GameObject { get; internal set; }
+        public EcsEntity Entity { get; internal set; }
         public Transform Transform { get; internal set; }
 
         private bool _enabled = true;
@@ -25,16 +26,16 @@ namespace Game.Core.ECS
 
         public bool EnabledInHierarchy => _enabledInHierarchy;
 
-        internal void AttachToGameObject(EcsEntity gameObject, SystemRegistry registry)
+        internal void AttachToEntity(EcsEntity entity, SystemRegistry registry)
         {
-            GameObject = gameObject;
-            Transform = GameObject.Transform;
+            Entity = entity;
+            Transform = Entity.Transform;
             InternalAttached(registry);
         }
 
         internal void HierarchyEnabledStateChanged()
         {
-            bool newState = _enabled && GameObject.Enabled;
+            bool newState = _enabled && Entity.Enabled;
             if (newState != _enabledInHierarchy)
             {
                 CoreHierarchyEnabledStateChanged(newState);

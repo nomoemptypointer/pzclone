@@ -1,7 +1,7 @@
 ﻿using Game.Core.ECS;
 using System.Numerics;
 
-namespace Game.Core
+namespace Game.Core.ECS.Components
 {
     public class Transform : EcsComponent
     {
@@ -24,7 +24,7 @@ namespace Game.Core
         internal Transform() { }
         internal Transform(EcsEntity owner)
         {
-            GameObject = owner;
+            Entity = owner;
         }
 
         public Vector3 Position

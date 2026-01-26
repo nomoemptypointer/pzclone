@@ -6,10 +6,7 @@
 
         internal SystemRegistry SystemRegistry { get; private set; }
 
-        internal void AttachRegistry(SystemRegistry registry)
-        {
-            SystemRegistry = registry;
-        }
+        internal void AttachRegistry(SystemRegistry registry) => SystemRegistry = registry;
 
         public void Update(double deltaTime)
         {

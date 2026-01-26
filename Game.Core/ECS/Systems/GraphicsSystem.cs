@@ -1,15 +1,14 @@
 ﻿using Game.Common;
-using Game.Core.ECS;
 using Game.Core.Graphics.Shaders;
 using Veldrid;
 using Veldrid.StartupUtilities;
 
-namespace Game.Core.Graphics
+namespace Game.Core.ECS.Systems
 {
     public class GraphicsSystem : EcsSystem
     {
         public GraphicsDevice GraphicsDevice { get; internal set; }
-        public IWindow Window => SystemRegistry.Get<IWindow>();
+        public IWindow Window => SystemRegistry.Get<IWindow>(); // TODO: Might be slow
         public ShaderManager ShaderManager { get; private set; }
         public Swapchain MainSwapchain { get; internal set; }
         public bool NoSwap { get; set; } = false;

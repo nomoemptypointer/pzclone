@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using Game.Core.ECS.Components;
+using System.Diagnostics;
 
 namespace Game.Core.ECS
 {
@@ -54,7 +55,7 @@ namespace Game.Core.ECS
             }
 
             list.Add(component);
-            component.AttachToGameObject(this, _registry);
+            component.AttachToEntity(this, _registry);
         }
 
         public void AddComponent<T>(T component) where T : EcsComponent => AddComponent((EcsComponent)component);
@@ -158,7 +159,7 @@ namespace Game.Core.ECS
         {
             T component;
             EcsEntity parent = this;
-            while ((parent = parent.Transform.Parent?.GameObject) != null)
+            while ((parent = parent.Transform.Parent?.Entity) != null)
             {
                 component = parent.GetComponent<T>();
                 if (component != null)
@@ -191,7 +192,7 @@ namespace Game.Core.ECS
         {
             foreach (var child in Transform.Children)
             {
-                EcsComponent ret = child.GameObject.GetComponent(componentType) ?? child.GameObject.GetComponentInChildren(componentType);
+                EcsComponent ret = child.Entity.GetComponent(componentType) ?? child.Entity.GetComponentInChildren(componentType);
                 if (ret != null)
                 {
                     return ret;
@@ -207,7 +208,7 @@ namespace Game.Core.ECS
         {
             foreach (var child in Transform.Children.ToArray())
             {
-                child.GameObject.CommitDestroy();
+                child.Entity.CommitDestroy();
             }
 
             foreach (var componentList in _components)
@@ -230,7 +231,7 @@ namespace Game.Core.ECS
 
             foreach (var child in Transform.Children)
             {
-                child.GameObject.HierarchyEnabledStateChanged();
+                child.Entity.HierarchyEnabledStateChanged();
             }
 
             HierarchyEnabledStateChanged();
@@ -260,7 +261,7 @@ namespace Game.Core.ECS
             }
         }
 
-        private bool IsParentEnabled() => Transform.Parent == null || Transform.Parent.GameObject.Enabled;
+        private bool IsParentEnabled() => Transform.Parent == null || Transform.Parent.Entity.Enabled;
 
         public override string ToString() => $"{Name}, {_components.Values.Sum(irc => irc.Count)} components";
     }

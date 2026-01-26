@@ -3,9 +3,9 @@ using Veldrid;
 using Veldrid.Sdl2;
 using Veldrid.StartupUtilities;
 
-namespace Game.Core
+namespace Game.Core.ECS.Systems
 {
-    public class DesktopWindow : EcsSystem, IWindow
+    public class DesktopWindowSystem : EcsSystem, IWindow
     {
         public Sdl2Window Base { get; private set; }
 
@@ -21,7 +21,7 @@ namespace Game.Core
 
         public event Action Resized;
 
-        public DesktopWindow()
+        public DesktopWindowSystem()
         {
             Base = CreateSdlWindow();
             Base.Resized += () =>
@@ -50,8 +50,6 @@ namespace Game.Core
                 Thread.Sleep(10);
             if (!shownInit)
                 ShowOnceInitialized();
-
-            Base.PumpEvents();
         }
 
         private void ShowOnceInitialized()

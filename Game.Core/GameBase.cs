@@ -10,7 +10,7 @@ namespace Game.Core
         public bool Running { get; private set; } = false;
         public SystemRegistry SystemRegistry { get; } = new SystemRegistry();
 
-        private readonly List<EcsEntity> _gameObjects = [];
+        private readonly List<EcsEntity> _entites = [];
         private readonly List<EcsEntity> _destroyList = [];
 
         public double TargetFrameTime
@@ -42,16 +42,14 @@ namespace Game.Core
 
         protected GameBase()
         {
-            Console.WriteLine("protected GameBase ctor called");
-            SystemRegistry.Register(new GameObjectQuerySystem(_gameObjects));
-            EcsEntity.InternalConstructed += OnGameObjectConstructed;
-            EcsEntity.InternalDestroyRequested += OnGameObjectDestroyRequested;
-            EcsEntity.InternalDestroyCommitted += OnGameObjectDestroyCommitted;
+            EcsEntity.InternalConstructed += OnEntityConstructed;
+            EcsEntity.InternalDestroyRequested += OnEntityDestroyRequested;
+            EcsEntity.InternalDestroyCommitted += OnEntityDestroyCommitted;
         }
 
         public virtual void Initialize()
         {
-
+            //SystemRegistry.Register(new EntityQuerySystem(_entites));
         }
 
         public virtual void Shutdown()
@@ -59,30 +57,23 @@ namespace Game.Core
             Running = false;
         }
 
-        protected void FlushDeletedObjects()
+        protected void FlushDeletedEntities()
         {
-            foreach (EcsEntity go in _destroyList)
-                go.CommitDestroy();
+            foreach (EcsEntity entity in _destroyList)
+                entity.CommitDestroy();
             _destroyList.Clear();
         }
 
-        private void OnGameObjectConstructed(EcsEntity go)
+        private void OnEntityConstructed(EcsEntity entity)
         {
-            go.SetRegistry(SystemRegistry);
-            lock (_gameObjects)
-                _gameObjects.Add(go);
+            entity.SetRegistry(SystemRegistry);
+            lock (_entites)
+                _entites.Add(entity);
         }
 
-        private void OnGameObjectDestroyRequested(EcsEntity go)
-        {
-            _destroyList.Add(go);
-        }
+        private void OnEntityDestroyRequested(EcsEntity entity) => _destroyList.Add(entity);
 
-        private void OnGameObjectDestroyCommitted(EcsEntity go)
-        {
-            lock (_gameObjects)
-                _gameObjects.Remove(go);
-        }
+        private void OnEntityDestroyCommitted(EcsEntity entity) { lock (_entites) _entites.Remove(entity); }
 
         public void AnnounceInitialized()
         {
@@ -105,13 +96,11 @@ namespace Game.Core
                 try
                 {
 #endif
-                FlushDeletedObjects();
-
-
-                foreach (var system in SystemRegistry.GetAllSystems())
-                {
-                    system.Update(DeltaTime);
-                }
+                    FlushDeletedEntities();
+                    foreach (var system in SystemRegistry.GetAllSystems())
+                    {
+                        system.Update(DeltaTime);
+                    }
 #if RELEASE
                 }
                 catch (Exception e)

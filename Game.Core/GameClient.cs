@@ -1,4 +1,5 @@
 ﻿using Game.Core.ECS;
+using Game.Core.ECS.Systems;
 using Game.Core.Graphics;
 
 namespace Game.Core
@@ -20,13 +21,15 @@ namespace Game.Core
         public override void Initialize()
         {
             if (!OperatingSystem.IsAndroid())
-                SystemRegistry.Register<IWindow, DesktopWindow>(new DesktopWindow());
+                SystemRegistry.Register<IWindow, DesktopWindowSystem>(new DesktopWindowSystem());
 
             var graphicsSystem = new GraphicsSystem();
             SystemRegistry.Register(graphicsSystem);
 
             if (!OperatingSystem.IsAndroid())
                 graphicsSystem.InitializeAll();
+
+            SystemRegistry.Register(new InputSystem());
 
             base.Initialize();
 
