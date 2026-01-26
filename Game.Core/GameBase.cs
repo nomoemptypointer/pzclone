@@ -86,12 +86,11 @@ namespace Game.Core
 
         public void AnnounceInitialized()
         {
-            RunLoop();
+            Running = true;
         }
 
         public void RunLoop()
         {
-            Running = true;
             _stopwatch = Stopwatch.StartNew();
 
             while (Running)

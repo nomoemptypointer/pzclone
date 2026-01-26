@@ -6,7 +6,6 @@ namespace Game.Desktop
     {
         static void Main() // TODO: We need to wrap this into some method outside Game.Desktop
         {
-            DesktopWindow dw = new();
             Core.GameClient client = new();
             Core.GameServer server = new();
 

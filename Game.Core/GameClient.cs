@@ -1,6 +1,5 @@
 ﻿using Game.Core.ECS;
 using Game.Core.Graphics;
-using Microsoft.Win32;
 
 namespace Game.Core
 {
@@ -20,20 +19,25 @@ namespace Game.Core
 
         public override void Initialize()
         {
-            SystemRegistry.Register<IWindow, DesktopWindow>(new DesktopWindow());
-            SystemRegistry.Register(new GraphicsSystem());
-            SystemRegistry.GetSystem<GraphicsSystem>().Initialize();
+            if (!OperatingSystem.IsAndroid())
+                SystemRegistry.Register<IWindow, DesktopWindow>(new DesktopWindow());
+
+            var graphicsSystem = new GraphicsSystem();
+            SystemRegistry.Register(graphicsSystem);
+
+            if (!OperatingSystem.IsAndroid())
+                graphicsSystem.InitializeAll();
+
             base.Initialize();
 
             _player = new EcsEntity();
 
-            AnnounceInitialized(); // Signals that the game has been initialized and should handle window stuff etc
+            AnnounceInitialized();
         }
 
         public override void Shutdown()
         {
             base.Shutdown();
-            // TODO: cleanup resources
         }
     }
 }

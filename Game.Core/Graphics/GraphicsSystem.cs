@@ -14,16 +14,10 @@ namespace Game.Core.Graphics
         public Swapchain MainSwapchain { get; internal set; }
         public bool NoSwap { get; set; } = false;
 
-        public void Initialize()
+        public void InitializeAll()
         {
-            CreateGraphicsDevice(false);
-            CreateResouces();
-        }
-
-        public void AttachExistingGraphicsDeviceAndroid(GraphicsDevice graphicsDevice)
-        {
-            if (OperatingSystem.IsAndroid())
-                GraphicsDevice = graphicsDevice;
+            CreateGraphicsDevice();
+            CreateResources();
         }
 
         public void CreateGraphicsDevice(bool recreate = false, AndroidCreateGraphicsDeviceModel? acgdm = null)
@@ -50,15 +44,15 @@ namespace Game.Core.Graphics
             }
             else if (OperatingSystem.IsAndroid())
             {
-                if (acgdm == null || !acgdm.HasValue)
-                    throw new ArgumentException("ACGDM is null or empty");
+                if (acgdm == null)
+                    throw new ArgumentException("ACGDM is null for Android initialization.");
 
                 var model = acgdm.Value;
 
                 GraphicsDevice = GraphicsDevice.CreateVulkan(options);
 
-                SwapchainSource ss = SwapchainSource.CreateAndroidSurface(model.HolderHandle, model.JNIEnvHandle);
-                SwapchainDescription sd = new(
+                var ss = SwapchainSource.CreateAndroidSurface(model.HolderHandle, model.JNIEnvHandle);
+                var sd = new SwapchainDescription(
                     ss,
                     model.Width,
                     model.Height,
@@ -68,11 +62,9 @@ namespace Game.Core.Graphics
 
                 MainSwapchain = GraphicsDevice.ResourceFactory.CreateSwapchain(sd);
             }
-
-
         }
 
-        private void CreateResouces()
+        private void CreateResources()
         {
             if (GraphicsDevice == null)
                 throw new Exception("Can't create resources when GraphicsDevice was not yet created");
@@ -112,7 +104,8 @@ namespace Game.Core.Graphics
 
         protected override void UpdateCore(double deltaTime)
         {
-            Render();
+            if (GraphicsDevice != null || MainSwapchain != null)
+                Render();
         }
     }
 }
