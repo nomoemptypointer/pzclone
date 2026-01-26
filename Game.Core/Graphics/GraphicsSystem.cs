@@ -2,7 +2,6 @@
 using Game.Core.ECS;
 using Game.Core.Graphics.Shaders;
 using Veldrid;
-using Veldrid.Sdl2;
 using Veldrid.StartupUtilities;
 
 namespace Game.Core.Graphics
@@ -10,7 +9,7 @@ namespace Game.Core.Graphics
     public class GraphicsSystem : EcsSystem
     {
         public GraphicsDevice GraphicsDevice { get; internal set; }
-        public Sdl2Window Window => Globals.Sdl2WindowHandle;
+        public IWindow Window => SystemRegistry.Get<IWindow>();
         public ShaderManager ShaderManager { get; private set; }
         public Swapchain MainSwapchain { get; internal set; }
         public bool NoSwap { get; set; } = false;
@@ -41,7 +40,7 @@ namespace Game.Core.Graphics
 
             if (OperatingSystem.IsWindows() || OperatingSystem.IsLinux())
             {
-                GraphicsDevice = VeldridStartup.CreateGraphicsDevice(Window, options);
+                GraphicsDevice = VeldridStartup.CreateGraphicsDevice(Window.Base, options);
                 MainSwapchain = GraphicsDevice.MainSwapchain;
 
                 Window.Resized += () =>

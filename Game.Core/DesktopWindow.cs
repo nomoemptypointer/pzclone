@@ -1,20 +1,33 @@
-﻿using Game.Common;
+﻿using Game.Core.ECS;
 using Veldrid;
 using Veldrid.Sdl2;
 using Veldrid.StartupUtilities;
 
-namespace Game.Desktop
+namespace Game.Core
 {
-    public class DesktopWindow
+    public class DesktopWindow : EcsSystem, IWindow
     {
         public Sdl2Window Base { get; private set; }
 
+        public int Width => Base.Width;
+
+        public int Height => Base.Height;
+
+        public bool Visible { get => Base.Visible; set => Base.Visible = value; }
+
+        public bool Exists => Base.Exists;
+
         private bool shownInit;
+
+        public event Action Resized;
 
         public DesktopWindow()
         {
             Base = CreateSdlWindow();
-            Globals.Sdl2WindowHandle = Base;
+            Base.Resized += () =>
+            {
+                Resized?.Invoke();
+            };
         }
 
         private static Sdl2Window CreateSdlWindow()
@@ -31,9 +44,9 @@ namespace Game.Desktop
             return VeldridStartup.CreateWindow(ref windowCI);
         }
 
-        public void Tick()
+        protected override void UpdateCore(double deltaTime)
         {
-            while (!Core.GameClient.Instance.Initialized)
+            while (!Core.GameClient.Instance.Running)
                 Thread.Sleep(10);
             if (!shownInit)
                 ShowOnceInitialized();
@@ -46,6 +59,21 @@ namespace Game.Desktop
             shownInit = true;
             Base.Visible = true;
             //Base.WindowState = WindowState.BorderlessFullScreen;
+        }
+
+        public void PumpEvents()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Show()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Close()
+        {
+            throw new NotImplementedException();
         }
     }
 }

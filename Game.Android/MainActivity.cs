@@ -50,7 +50,7 @@ namespace Game.Android
         {
             _surfaceView.StartRenderingLoop(() =>
             {
-                _game.Run();
+                _game.RunLoop();
             });
         }
 

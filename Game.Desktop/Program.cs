@@ -1,4 +1,6 @@
-﻿namespace Game.Desktop
+﻿using Game.Core;
+
+namespace Game.Desktop
 {
     public class Program
     {
@@ -11,13 +13,11 @@
             var serverThread = new Thread(() =>
             {
                 server.Initialize();
-                server.Run();
                 server.Shutdown();
             })
             { IsBackground = true };
 
             client.Initialize();
-            client.Run(dw.Tick);
             client.Shutdown();
         }
     }

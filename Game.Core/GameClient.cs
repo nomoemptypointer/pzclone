@@ -1,5 +1,6 @@
 ﻿using Game.Core.ECS;
 using Game.Core.Graphics;
+using Microsoft.Win32;
 
 namespace Game.Core
 {
@@ -19,6 +20,7 @@ namespace Game.Core
 
         public override void Initialize()
         {
+            SystemRegistry.Register<IWindow, DesktopWindow>(new DesktopWindow());
             SystemRegistry.Register(new GraphicsSystem());
             SystemRegistry.GetSystem<GraphicsSystem>().Initialize();
             base.Initialize();

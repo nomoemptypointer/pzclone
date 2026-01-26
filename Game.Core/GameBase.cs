@@ -7,7 +7,6 @@ namespace Game.Core
 {
     public abstract class GameBase
     {
-        public bool Initialized { get; private set; } = false;
         public bool Running { get; private set; } = false;
         public SystemRegistry SystemRegistry { get; } = new SystemRegistry();
 
@@ -85,10 +84,12 @@ namespace Game.Core
                 _gameObjects.Remove(go);
         }
 
-        public void AnnounceInitialized() => Initialized = true;
+        public void AnnounceInitialized()
+        {
+            RunLoop();
+        }
 
-        // Main game loop
-        public void Run(params Action[] perFrameActions)
+        public void RunLoop()
         {
             Running = true;
             _stopwatch = Stopwatch.StartNew();
@@ -107,32 +108,17 @@ namespace Game.Core
                 FlushDeletedObjects();
 
 
-                var systemEnumerator = SystemRegistry.GetSystemsEnumerator();
-                while (systemEnumerator.MoveNext())
+                foreach (var system in SystemRegistry.GetAllSystems())
                 {
-                    var kvp = systemEnumerator.Current;
-                    ECS.EcsSystem system = kvp.Value;
                     system.Update(DeltaTime);
                 }
 #if RELEASE
                 }
                 catch (Exception e)
                 {
-                    LogException(e);
+                    CrashLogHelper.LogUnhandledException(e);
                 }
 #endif
-
-                foreach (var action in perFrameActions)
-                {
-                    try
-                    {
-                        action?.Invoke();
-                    }
-                    catch (Exception e)
-                    {
-                        CrashLogHelper.LogUnhandledException(e);
-                    }
-                }
 
                 double frameEnd = _stopwatch.Elapsed.TotalSeconds;
                 double frameTime = frameEnd - frameStart;
