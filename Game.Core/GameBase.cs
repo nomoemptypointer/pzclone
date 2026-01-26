@@ -2,7 +2,6 @@
 using Game.Core.ECS;
 using Game.Graphics;
 using System.Diagnostics;
-using Veldrid;
 
 namespace Game.Core
 {
@@ -41,7 +40,7 @@ namespace Game.Core
 
         private Stopwatch _stopwatch;
         private double _accumulatedTime;
-        private double _targetFrameTime;
+        private double _targetFrameTime = 0;
 
         protected GameBase()
         {
@@ -54,7 +53,7 @@ namespace Game.Core
 
         public virtual void Initialize()
         {
-            if (!OperatingSystem.IsAndroid())
+            if (!OperatingSystem.IsAndroid()) // TODO: Is this still required?
                 GraphicsRenderer.Singleton.Initialize();
         }
 

@@ -9,4 +9,8 @@
     <ProjectReference Include="..\Game.Graphics\Game.Graphics.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Networking\" />
+  </ItemGroup>
+
 </Project>

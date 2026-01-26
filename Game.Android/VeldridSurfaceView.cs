@@ -2,8 +2,8 @@
 using Android.Runtime;
 using Android.Views;
 using Game.Graphics;
-using Veldrid;
 using Android.Graphics;
+using Game.Common;
 
 namespace Game.Android
 {
@@ -23,32 +23,18 @@ namespace Game.Android
 
         public void SurfaceCreated(ISurfaceHolder holder)
         {
-            GraphicsDeviceOptions options = new()
-            {
-                Debug = false,
-                PreferStandardClipSpaceYDirection = true,
-                PreferDepthRangeZeroToOne = true,
-                SyncToVerticalBlank = false
-            };
-
-            var gd = GraphicsDevice.CreateVulkan(options);
-            _renderer.AttachExistingGraphicsDeviceAndroid(gd);
-
-            // Create the Swapchain for Android
-            SwapchainSource ss = SwapchainSource.CreateAndroidSurface(holder.Surface.Handle, JNIEnv.Handle);
-            SwapchainDescription sd = new(
-                ss,
-                (uint)Width,
-                (uint)Height,
-                null,
-                options.SyncToVerticalBlank
+            var model = new AndroidCreateGraphicsDeviceModel(
+                holderHandle: holder.Surface.Handle,
+                jniEnvHandle: JNIEnv.Handle,
+                width: (uint)Width,
+                height: (uint)Height
             );
-            _renderer.MainSwapchain = gd.ResourceFactory.CreateSwapchain(sd);
 
+            _renderer.CreateGraphicsDevice(recreate: false, acgdm: model);
 
-            // Fire the event so MainActivity can start the game loop
             OnGraphicsDeviceCreated?.Invoke();
         }
+
 
         public void SurfaceDestroyed(ISurfaceHolder holder)
         {

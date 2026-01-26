@@ -1,12 +1,13 @@
-﻿using Game.Common.Windowing;
-using Veldrid;
+﻿using Veldrid;
 using Veldrid.Sdl2;
 using Veldrid.StartupUtilities;
 
 namespace Game.Desktop
 {
-    public class DesktopWindow : AbstractWindow
+    public class DesktopWindow
     {
+        public Sdl2Window Base { get; private set; }
+
         private bool shownInit;
 
         public DesktopWindow()
@@ -28,20 +29,21 @@ namespace Game.Desktop
             return VeldridStartup.CreateWindow(ref windowCI);
         }
 
-        public override void Tick(GraphicsDevice gd)
+        public void Tick()
         {
-            while (!Core.Game.Instance.Initialized)
+            while (!Core.GameClient.Instance.Initialized)
                 Thread.Sleep(10);
             if (!shownInit)
-                Show();
+                ShowOnceInitialized();
 
             Base.PumpEvents();
         }
 
-        public override void Show()
+        private void ShowOnceInitialized()
         {
             shownInit = true;
             Base.Visible = true;
+            Base.WindowState = WindowState.BorderlessFullScreen;
         }
     }
 }

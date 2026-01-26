@@ -1,6 +1,7 @@
-﻿using Game.Common.Windowing;
+﻿using Game.Common;
 using Game.Graphics.Shaders;
 using Veldrid;
+using Veldrid.Sdl2;
 using Veldrid.StartupUtilities;
 
 namespace Game.Graphics
@@ -9,9 +10,9 @@ namespace Game.Graphics
     {
         public static GraphicsRenderer Singleton { get; private set; }
         public GraphicsDevice GraphicsDevice { get; internal set; }
-        public AbstractWindow Window { get; set; }
+        public Sdl2Window Window { get; set; }
         public ShaderManager ShaderManager { get; private set; }
-        public Swapchain MainSwapchain { get; set; }
+        public Swapchain MainSwapchain { get; internal set; }
         public bool NoSwap { get; set; } = false;
 
         public GraphicsRenderer()
@@ -34,7 +35,7 @@ namespace Game.Graphics
                 GraphicsDevice = graphicsDevice;
         }
 
-        public void CreateGraphicsDevice(bool recreate = false) // Also handle android
+        public void CreateGraphicsDevice(bool recreate = false, AndroidCreateGraphicsDeviceModel? acgdm = null)
         {
             if (recreate)
                 GraphicsDevice.Dispose();
@@ -46,13 +47,38 @@ namespace Game.Graphics
                 SyncToVerticalBlank = false
             };
 
-            GraphicsDevice = VeldridStartup.CreateGraphicsDevice(Window.Base, options);
-            MainSwapchain = GraphicsDevice.MainSwapchain;
-
-            Window.Base.Resized += () =>
+            if (OperatingSystem.IsWindows() || OperatingSystem.IsLinux())
             {
-                Resize((uint)Window.Base.Width, (uint)Window.Base.Height);
-            };
+                GraphicsDevice = VeldridStartup.CreateGraphicsDevice(Window, options);
+                MainSwapchain = GraphicsDevice.MainSwapchain;
+
+                Window.Resized += () =>
+                {
+                    Resize((uint)Window.Width, (uint)Window.Height);
+                };
+            }
+            else if (OperatingSystem.IsAndroid())
+            {
+                if (acgdm == null || !acgdm.HasValue)
+                    throw new ArgumentException("ACGDM is null or empty");
+
+                var model = acgdm.Value;
+
+                GraphicsDevice = GraphicsDevice.CreateVulkan(options);
+
+                SwapchainSource ss = SwapchainSource.CreateAndroidSurface(model.HolderHandle, model.JNIEnvHandle);
+                SwapchainDescription sd = new(
+                    ss,
+                    model.Width,
+                    model.Height,
+                    options.SwapchainDepthFormat,
+                    options.SyncToVerticalBlank
+                );
+
+                MainSwapchain = GraphicsDevice.ResourceFactory.CreateSwapchain(sd);
+            }
+
+
         }
 
         private void CreateResouces()
@@ -90,9 +116,7 @@ namespace Game.Graphics
             GraphicsDevice.WaitForIdle();
 
             if (!NoSwap)
-            {
                 GraphicsDevice.SwapBuffers(MainSwapchain);
-            }
         }
     }
 }

@@ -2,13 +2,13 @@
 
 namespace Game.Core
 {
-    public class Game : GameBase
+    public class GameClient : GameBase
     {
-        public static Game Instance { get; private set; }
+        public static GameClient Instance { get; private set; }
 
         private GameObject _player;
 
-        public Game()
+        public GameClient()
         {
             if (Instance != null)
                 throw new InvalidOperationException("Game instance already exists!");

@@ -1,5 +1,4 @@
 ﻿using Game.Graphics;
-using System.Reflection;
 
 namespace Game.Desktop
 {
@@ -7,32 +6,25 @@ namespace Game.Desktop
     {
         static void Main() // TODO: We need to wrap this into some method outside Game.Desktop
         {
-            foreach (var name in Assembly.GetExecutingAssembly().GetManifestResourceNames())
-            {
-                Console.WriteLine(name);
-            }
-
             DesktopWindow dw = new();
+            GraphicsRenderer graphicsRenderer = new() { Window = dw.Base };
+            Core.GameClient client = new();
+            Core.GameServer server = new();
 
-            GraphicsRenderer graphicsRenderer = new()
+            var serverThread = new Thread(() =>
             {
-                Window = dw
-            };
+                server.Initialize();
+                server.Run();
+                server.Shutdown();
+            })
+            { IsBackground = true };
 
-            Core.Game game = new();
+            client.Initialize();
 
-            game.Initialize();
+            client.SetRenderAction(graphicsRenderer.Render);
+            client.Run(dw.Tick);
 
-            dw.Tick(graphicsRenderer.GraphicsDevice); // Needs to be called by game.Run();
-            game.TargetFramesPerSecond = double.MaxValue;
-
-            game.SetRenderAction(graphicsRenderer.Render);
-            game.Run(
-                () => dw.Tick(graphicsRenderer.GraphicsDevice),
-                () => Console.WriteLine($"DeltaTime: {game.DeltaTime:F4}s") // example
-            );
-
-            game.Shutdown();
+            client.Shutdown();
         }
     }
 }

@@ -1,8 +1,9 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using Game.Graphics;
+using Android.Views;
 using Game.Core;
+using Game.Graphics;
 
 namespace Game.Android
 {
@@ -15,19 +16,29 @@ namespace Game.Android
     {
         internal GraphicsRenderer _renderer;
         private VeldridSurfaceView _surfaceView;
-        private Core.Game _game;
+        private Core.GameClient _game;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             RequestedOrientation = ScreenOrientation.Landscape;
+
+            var decorView = Window.DecorView;
+            decorView.SystemUiFlags =
+                SystemUiFlags.ImmersiveSticky |
+                SystemUiFlags.HideNavigation |
+                SystemUiFlags.Fullscreen |
+                SystemUiFlags.LayoutStable |
+                SystemUiFlags.LayoutHideNavigation |
+                SystemUiFlags.LayoutFullscreen;
+
             _renderer = new GraphicsRenderer();
 
             _surfaceView = new VeldridSurfaceView(this, _renderer);
             SetContentView(_surfaceView);
 
-            _game = new Core.Game();
+            _game = new Core.GameClient();
             _game.Initialize();
 
             _game.SetRenderAction(() =>
