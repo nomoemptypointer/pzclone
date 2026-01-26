@@ -1,24 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFramework>net9.0-android35.0</TargetFramework>
-        <SupportedOSPlatformVersion>28</SupportedOSPlatformVersion>
-        <OutputType>Exe</OutputType>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <ApplicationId>xyz.mono.game</ApplicationId>
-        <ApplicationVersion>1</ApplicationVersion>
-        <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-        <!--
+	<PropertyGroup>
+		<TargetFramework>net9.0-android35.0</TargetFramework>
+		<SupportedOSPlatformVersion>28</SupportedOSPlatformVersion>
+		<OutputType>Exe</OutputType>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<ApplicationId>xyz.mono.game</ApplicationId>
+		<ApplicationVersion>1</ApplicationVersion>
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<!--
           Enables trim analyzers and full trimming during Release mode.
           To learn more, see: https://learn.microsoft.com/dotnet/core/deploying/trimming/trimming-options#trimming-granularity
         -->
-        <TrimMode>full</TrimMode>
-    </PropertyGroup>
+		<TrimMode>full</TrimMode>
+	</PropertyGroup>
+	<ItemGroup>
+	  <PackageReference Include="Veldrid" Version="4.9.0" />
+	  <PackageReference Include="Veldrid.SDL2" Version="4.9.0" />
+	</ItemGroup>
 	
     <ItemGroup>
-		<PackageReference Include="SDL3-CS" Version="3.5.0-preview.20260112-122507" />
-    </ItemGroup>
-	
-    <ItemGroup>
+      <ProjectReference Include="..\Game.Core\Game.Core.csproj" />
       <ProjectReference Include="..\Game\Game.csproj" />
       <ProjectReference Include="..\Game.Graphics\Game.Graphics.csproj" />
     </ItemGroup>

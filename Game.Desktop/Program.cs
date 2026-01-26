@@ -1,6 +1,5 @@
 ﻿using Game.Graphics;
 using System.Reflection;
-using Veldrid;
 
 namespace Game.Desktop
 {

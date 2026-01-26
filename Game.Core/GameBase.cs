@@ -54,7 +54,8 @@ namespace Game.Core
 
         public virtual void Initialize()
         {
-            GraphicsRenderer.Singleton.Initialize();
+            if (!OperatingSystem.IsAndroid())
+                GraphicsRenderer.Singleton.Initialize();
         }
 
         public virtual void Shutdown()

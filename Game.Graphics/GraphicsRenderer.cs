@@ -1,18 +1,20 @@
 ﻿using Game.Common.Windowing;
 using Game.Graphics.Shaders;
 using Veldrid;
+using Veldrid.StartupUtilities;
 
 namespace Game.Graphics
 {
     public class GraphicsRenderer
     {
         public static GraphicsRenderer Singleton { get; private set; }
-        public GraphicsDevice GraphicsDevice { get; private set; }
+        public GraphicsDevice GraphicsDevice { get; internal set; }
         public AbstractWindow Window { get; set; }
         public ShaderManager ShaderManager { get; private set; }
-        public bool FastFrame { get; private set; } = false;
+        public Swapchain MainSwapchain { get; set; }
+        public bool NoSwap { get; set; } = false;
 
-        public GraphicsRenderer(GraphicsBackend backend = GraphicsBackend.Vulkan)
+        public GraphicsRenderer()
         {
             if (Singleton == null)
                 Singleton = this;
@@ -26,35 +28,31 @@ namespace Game.Graphics
             //CreateResouces();
         }
 
-        public void CreateGraphicsDevice(bool recreate = false)
+        public void AttachExistingGraphicsDeviceAndroid(GraphicsDevice graphicsDevice)
+        {
+            if (OperatingSystem.IsAndroid())
+                GraphicsDevice = graphicsDevice;
+        }
+
+        public void CreateGraphicsDevice(bool recreate = false) // Also handle android
         {
             if (recreate)
                 GraphicsDevice.Dispose();
 
-            var options = new GraphicsDeviceOptions(
-                debug: true,
-                swapchainDepthFormat: null, // no depth buffer by default
-                syncToVerticalBlank: false,
-                resourceBindingModel: ResourceBindingModel.Improved
-            );
+            GraphicsDeviceOptions options = new()
+            {
+                PreferStandardClipSpaceYDirection = true,
+                PreferDepthRangeZeroToOne = true,
+                SyncToVerticalBlank = false
+            };
 
-            if (Window.BaseSDL3 == 0)
-                throw new Exception("Window handle is null (CreateGraphicsDevice)"); // never gets fired because window exists here (?)
+            GraphicsDevice = VeldridStartup.CreateGraphicsDevice(Window.Base, options);
+            MainSwapchain = GraphicsDevice.MainSwapchain;
 
-            SwapchainSource source = SwapchainSourceExtensions.CreateSDL(Window.BaseSDL3); // BUG (Android): Passed Window.BaseSDL3 from here exists but inside the method it is null/zero
-
-            var swapchainDesc = new SwapchainDescription(
-                source,
-                1920,
-                1080,
-                null,
-                false // vsync
-            );
-
-            GraphicsDevice = GraphicsDevice.CreateVulkan( // TODO: Legacy backend (opengl/es)
-                options,
-                swapchainDesc
-            );
+            Window.Base.Resized += () =>
+            {
+                Resize((uint)Window.Base.Width, (uint)Window.Base.Height);
+            };
         }
 
         private void CreateResouces()
@@ -70,30 +68,31 @@ namespace Game.Graphics
         /// </summary>
         public void Resize(uint width, uint height)
         {
-            if (width == 0 || height == 0)
-                return; // Prevent backend from blowing up
+            if (width == 0 || height == 0 || GraphicsDevice == null || GraphicsDevice.MainSwapchain == null)
+                return;
 
             GraphicsDevice.ResizeMainWindow(width, height);
         }
 
         public void Render()
         {
-            var gd = GraphicsDevice;
-            var sc = gd.MainSwapchain;
-
-            using var cl = gd.ResourceFactory.CreateCommandList();
+            using var cl = GraphicsDevice.ResourceFactory.CreateCommandList();
 
             cl.Begin();
 
-            cl.SetFramebuffer(sc.Framebuffer);
+            cl.SetFramebuffer(MainSwapchain.Framebuffer);
             cl.ClearColorTarget(0, RgbaFloat.Blue);
 
             cl.End();
 
-            gd.SubmitCommands(cl);
+            GraphicsDevice.SubmitCommands(cl);
 
-            if (!FastFrame)
-                gd.SwapBuffers(sc);
+            GraphicsDevice.WaitForIdle();
+
+            if (!NoSwap)
+            {
+                GraphicsDevice.SwapBuffers(MainSwapchain);
+            }
         }
     }
 }

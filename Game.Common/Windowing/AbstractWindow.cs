@@ -1,11 +1,12 @@
 ﻿using Veldrid;
+using Veldrid.Sdl2;
 
 namespace Game.Common.Windowing
 {
     public abstract class AbstractWindow
     {
         public static AbstractWindow Singleton { get; internal set; }
-        public nint BaseSDL3 { get; set; } = nint.Zero;
+        public Sdl2Window Base { get; set; }
 
         protected AbstractWindow()
         {

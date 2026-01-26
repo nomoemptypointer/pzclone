@@ -1,8 +1,7 @@
 ﻿using Game.Common.Windowing;
-using Game.Graphics;
-using SDL3;
 using Veldrid;
-using static SDL3.SDL;
+using Veldrid.Sdl2;
+using Veldrid.StartupUtilities;
 
 namespace Game.Desktop
 {
@@ -12,40 +11,21 @@ namespace Game.Desktop
 
         public DesktopWindow()
         {
-            BaseSDL3 = CreateSdlWindow();
+            Base = CreateSdlWindow();
         }
 
-        private nint CreateSdlWindow(GraphicsBackend graphicsBackend = GraphicsBackend.Vulkan)
+        private static Sdl2Window CreateSdlWindow()
         {
-            WindowFlags flags = WindowFlags.Hidden | WindowFlags.Resizable;
-
-            switch (graphicsBackend)
+            WindowCreateInfo windowCI = new()
             {
-                case GraphicsBackend.Vulkan:
-                    flags |= WindowFlags.Vulkan;
-                    break;
-                case GraphicsBackend.OpenGL:
-                case GraphicsBackend.OpenGLES:
-                    flags |= WindowFlags.OpenGL;
-                    break;
-                case GraphicsBackend.Metal:
-                    flags |= WindowFlags.Metal;
-                    break;
-                default:
-                    break;
-            }
-
-            if (!Init(InitFlags.Video))
-                throw new Exception($"SDL could not initialize: {SDL.GetError()}");
-
-            var window = CreateWindow(
-                "",
-                1920,
-                1080,
-                flags
-            );
-
-            return window;
+                X = 100,
+                Y = 100,
+                WindowWidth = 960,
+                WindowHeight = 540,
+                WindowTitle = "",
+                WindowInitialState = WindowState.Hidden
+            };
+            return VeldridStartup.CreateWindow(ref windowCI);
         }
 
         public override void Tick(GraphicsDevice gd)
@@ -55,21 +35,13 @@ namespace Game.Desktop
             if (!shownInit)
                 Show();
 
-            while (PollEvent(out var e))
-            {
-                if (e.Type == (uint)EventType.WindowResized)
-                {
-                    int width = e.Window.Data1;
-                    int height = e.Window.Data2;
-                    GraphicsRenderer.Singleton.Resize((uint)width, (uint)height);
-                }
-            }
+            Base.PumpEvents();
         }
 
         public override void Show()
         {
             shownInit = true;
-            ShowWindow(BaseSDL3);
+            Base.Visible = true;
         }
     }
 }

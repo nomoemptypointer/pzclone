@@ -1,36 +1,69 @@
+using Android.App;
 using Android.Content.PM;
-using Game.Common.Windowing;
+using Android.OS;
 using Game.Graphics;
-using Org.Libsdl.App;
-using Veldrid;
-using static Android.Content.PM.ConfigChanges;
-using static SDL3.SDL;
-using SDL = SDL3.SDL;
+using Game.Core;
 
 namespace Game.Android
 {
     [Activity(
-    Label = "@string/app_name",
-    MainLauncher = true,
-    AlwaysRetainTaskState = true,
-    LaunchMode = LaunchMode.SingleInstance,
-    Exported = true,
-    ConfigurationChanges =
-        LayoutDirection | ConfigChanges.Locale | GrammaticalGender | FontScale |
-        FontWeightAdjustment | ConfigChanges.Orientation | UiMode |
-        ScreenLayout | ScreenSize | SmallestScreenSize |
-        Keyboard | KeyboardHidden | Navigation
+        Label = "@string/app_name",
+        MainLauncher = true,
+        ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize
     )]
-
-    public class MainActivity : SDLActivity
+    public class MainActivity : Activity
     {
-        protected override string[] GetLibraries() => ["SDL3"];
+        internal GraphicsRenderer _renderer;
+        private VeldridSurfaceView _surfaceView;
+        private Core.Game _game;
 
-        protected override void Main()
+        protected override void OnCreate(Bundle savedInstanceState)
         {
-            AndroidWindow aw = new();
-            GraphicsRenderer graphicsRenderer = new(aw);
-            aw.Run(graphicsRenderer.GraphicsDevice);
+            base.OnCreate(savedInstanceState);
+
+            RequestedOrientation = ScreenOrientation.Landscape;
+            _renderer = new GraphicsRenderer();
+
+            _surfaceView = new VeldridSurfaceView(this, _renderer);
+            SetContentView(_surfaceView);
+
+            _game = new Core.Game();
+            _game.Initialize();
+
+            _game.SetRenderAction(() =>
+            {
+                _renderer?.Render();
+            });
+
+            _game.TargetFramesPerSecond = double.MaxValue;
+
+            _surfaceView.OnGraphicsDeviceCreated += StartGameLoop;
+        }
+
+        private void StartGameLoop()
+        {
+            _surfaceView.StartRenderingLoop(() =>
+            {
+                _game.Run();
+            });
+        }
+
+        protected override void OnPause()
+        {
+            base.OnPause();
+            _surfaceView?.PauseRenderingLoop();
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+            //_surfaceView?.ResumeRenderingLoop();
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            _renderer.GraphicsDevice?.Dispose();
         }
     }
 }
