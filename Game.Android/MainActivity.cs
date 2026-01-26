@@ -3,7 +3,7 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Views;
 using Game.Core;
-using Game.Graphics;
+using Game.Core.Graphics;
 
 namespace Game.Android
 {
@@ -14,7 +14,7 @@ namespace Game.Android
     )]
     public class MainActivity : Activity
     {
-        internal GraphicsRenderer _renderer;
+        internal GraphicsSystem _renderer;
         private VeldridSurfaceView _surfaceView;
         private Core.GameClient _game;
 
@@ -33,18 +33,13 @@ namespace Game.Android
                 SystemUiFlags.LayoutHideNavigation |
                 SystemUiFlags.LayoutFullscreen;
 
-            _renderer = new GraphicsRenderer();
+            _renderer = new GraphicsSystem();
 
             _surfaceView = new VeldridSurfaceView(this, _renderer);
             SetContentView(_surfaceView);
 
             _game = new Core.GameClient();
             _game.Initialize();
-
-            _game.SetRenderAction(() =>
-            {
-                _renderer?.Render();
-            });
 
             _game.TargetFramesPerSecond = double.MaxValue;
 

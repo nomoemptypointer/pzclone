@@ -1,21 +1,21 @@
 ﻿using Android.Content;
 using Android.Runtime;
 using Android.Views;
-using Game.Graphics;
 using Android.Graphics;
 using Game.Common;
+using Game.Core.Graphics;
 
 namespace Game.Android
 {
     internal class VeldridSurfaceView : SurfaceView, ISurfaceHolderCallback
     {
-        private GraphicsRenderer _renderer;
+        private GraphicsSystem _renderer;
         private bool _running;
         private CancellationTokenSource _cts;
 
         public event Action OnGraphicsDeviceCreated;
 
-        public VeldridSurfaceView(Context context, GraphicsRenderer renderer) : base(context)
+        public VeldridSurfaceView(Context context, GraphicsSystem renderer) : base(context)
         {
             _renderer = renderer;
             Holder.AddCallback(this);

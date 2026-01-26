@@ -1,4 +1,5 @@
 ﻿using Game.Core.ECS;
+using Game.Core.Graphics;
 
 namespace Game.Core
 {
@@ -6,7 +7,7 @@ namespace Game.Core
     {
         public static GameClient Instance { get; private set; }
 
-        private GameObject _player;
+        private EcsEntity _player;
 
         public GameClient()
         {
@@ -18,9 +19,11 @@ namespace Game.Core
 
         public override void Initialize()
         {
+            SystemRegistry.Register(new GraphicsSystem());
+            SystemRegistry.GetSystem<GraphicsSystem>().Initialize();
             base.Initialize();
 
-            _player = new GameObject();
+            _player = new EcsEntity();
 
             AnnounceInitialized(); // Signals that the game has been initialized and should handle window stuff etc
         }

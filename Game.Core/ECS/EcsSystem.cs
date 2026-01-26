@@ -1,6 +1,6 @@
 ﻿namespace Game.Core.ECS
 {
-    public abstract class GameSystem
+    public abstract class EcsSystem
     {
         public bool Enabled { get; set; } = true;
 

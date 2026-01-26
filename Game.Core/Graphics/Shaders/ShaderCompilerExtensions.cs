@@ -1,7 +1,7 @@
 ﻿using Veldrid;
 using Veldrid.SPIRV;
 
-namespace Game.Graphics.Shaders
+namespace Game.Core.Graphics.Shaders
 {
     public static class ShaderCompilerExtensions
     {

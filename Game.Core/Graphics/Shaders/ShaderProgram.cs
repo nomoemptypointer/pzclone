@@ -1,6 +1,6 @@
 ﻿using Veldrid;
 
-namespace Game.Graphics.Shaders
+namespace Game.Core.Graphics.Shaders
 {
     public sealed class ShaderProgram(Shader[] shaders) : IDisposable
     {

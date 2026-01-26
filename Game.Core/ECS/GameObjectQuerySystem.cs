@@ -1,18 +1,18 @@
 ﻿namespace Game.Core.ECS
 {
-    public class GameObjectQuerySystem : GameSystem
+    public class GameObjectQuerySystem : EcsSystem
     {
-        private readonly IReadOnlyList<GameObject> _gameObjects;
+        private readonly IReadOnlyList<EcsEntity> _gameObjects;
 
-        public GameObjectQuerySystem(IReadOnlyList<GameObject> gameObjectList) => _gameObjects = gameObjectList;
+        public GameObjectQuerySystem(IReadOnlyList<EcsEntity> gameObjectList) => _gameObjects = gameObjectList;
 
-        protected override void UpdateCore(double deltaSeconds) { }
+        protected override void UpdateCore(double deltaTime) { }
 
-        public GameObject FindByName(string name) => _gameObjects.FirstOrDefault(go => go.Name == name);
+        public EcsEntity FindByName(string name) => _gameObjects.FirstOrDefault(go => go.Name == name);
 
-        public IEnumerable<GameObject> GetUnparentedGameObjects() => _gameObjects.Where(go => go.Transform.Parent == null);
+        public IEnumerable<EcsEntity> GetUnparentedGameObjects() => _gameObjects.Where(go => go.Transform.Parent == null);
 
-        public IEnumerable<GameObject> GetAllGameObjects() => _gameObjects;
+        public IEnumerable<EcsEntity> GetAllGameObjects() => _gameObjects;
 
         public string GetCloneName(string name)
         {

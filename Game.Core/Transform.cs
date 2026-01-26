@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace Game.Core
 {
-    public class Transform : Component
+    public class Transform : EcsComponent
     {
         //public new GameObject GameObject => base.GameObject;
         public event Action<Transform, Transform?, Transform?>? ParentChanged;
@@ -22,7 +22,7 @@ namespace Game.Core
         public IReadOnlyList<Transform> Children => _children;
 
         internal Transform() { }
-        internal Transform(GameObject owner)
+        internal Transform(EcsEntity owner)
         {
             GameObject = owner;
         }

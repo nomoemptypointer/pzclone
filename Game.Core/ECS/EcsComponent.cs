@@ -2,17 +2,10 @@
 
 namespace Game.Core.ECS
 {
-    public abstract class Component
+    public abstract class EcsComponent
     {
-        public GameObject GameObject { get; internal set; }
+        public EcsEntity GameObject { get; internal set; }
         public Transform Transform { get; internal set; }
-
-        internal void AttachToGameObject(GameObject gameObject, SystemRegistry registry)
-        {
-            GameObject = gameObject;
-            Transform = GameObject.Transform;
-            InternalAttached(registry);
-        }
 
         private bool _enabled = true;
         private bool _enabledInHierarchy = false;
@@ -31,6 +24,13 @@ namespace Game.Core.ECS
         }
 
         public bool EnabledInHierarchy => _enabledInHierarchy;
+
+        internal void AttachToGameObject(EcsEntity gameObject, SystemRegistry registry)
+        {
+            GameObject = gameObject;
+            Transform = GameObject.Transform;
+            InternalAttached(registry);
+        }
 
         internal void HierarchyEnabledStateChanged()
         {

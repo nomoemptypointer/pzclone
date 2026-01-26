@@ -1,7 +1,7 @@
 ﻿using Veldrid;
 using Veldrid.SPIRV;
 
-namespace Game.Graphics.Shaders
+namespace Game.Core.Graphics.Shaders
 {
     public sealed class ShaderManager : IDisposable
     {
@@ -47,7 +47,7 @@ namespace Game.Graphics.Shaders
         {
             for (int i = 0; i < (int)ShaderId.Count; i++)
             {
-                var def = ShaderDefinitions.All[i];
+                var def = ShaderDefinition.All[i];
 
                 Load(
                     (ShaderId)i,

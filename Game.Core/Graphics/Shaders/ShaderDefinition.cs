@@ -1,7 +1,12 @@
-﻿namespace Game.Graphics.Shaders
+﻿namespace Game.Core.Graphics.Shaders
 {
     public readonly struct ShaderDefinition
     {
+        public static readonly ShaderDefinition[] All =
+        [
+            new("DebugText"),
+        ];
+
         public readonly string VertexSource;
         public readonly string FragmentSource;
         public readonly string VertexName;

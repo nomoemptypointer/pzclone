@@ -1,6 +1,6 @@
 ﻿using Game.Core.Diagnostics;
 using Game.Core.ECS;
-using Game.Graphics;
+using Game.Core.Graphics;
 using System.Diagnostics;
 
 namespace Game.Core
@@ -11,9 +11,8 @@ namespace Game.Core
         public bool Running { get; private set; } = false;
         public SystemRegistry SystemRegistry { get; } = new SystemRegistry();
 
-        private readonly List<GameObject> _gameObjects = [];
-        private readonly List<GameObject> _destroyList = [];
-        private Action _renderAction;
+        private readonly List<EcsEntity> _gameObjects = [];
+        private readonly List<EcsEntity> _destroyList = [];
 
         public double TargetFrameTime
         {
@@ -46,44 +45,41 @@ namespace Game.Core
         {
             Console.WriteLine("protected GameBase ctor called");
             SystemRegistry.Register(new GameObjectQuerySystem(_gameObjects));
-            GameObject.InternalConstructed += OnGameObjectConstructed;
-            GameObject.InternalDestroyRequested += OnGameObjectDestroyRequested;
-            GameObject.InternalDestroyCommitted += OnGameObjectDestroyCommitted;
+            EcsEntity.InternalConstructed += OnGameObjectConstructed;
+            EcsEntity.InternalDestroyRequested += OnGameObjectDestroyRequested;
+            EcsEntity.InternalDestroyCommitted += OnGameObjectDestroyCommitted;
         }
 
         public virtual void Initialize()
         {
-            if (!OperatingSystem.IsAndroid()) // TODO: Is this still required?
-                GraphicsRenderer.Singleton.Initialize();
+
         }
 
         public virtual void Shutdown()
         {
-
+            Running = false;
         }
-
-        protected void LogException(Exception e) => CrashLogHelper.LogUnhandledException(e, this);
 
         protected void FlushDeletedObjects()
         {
-            foreach (GameObject go in _destroyList)
+            foreach (EcsEntity go in _destroyList)
                 go.CommitDestroy();
             _destroyList.Clear();
         }
 
-        private void OnGameObjectConstructed(GameObject go)
+        private void OnGameObjectConstructed(EcsEntity go)
         {
             go.SetRegistry(SystemRegistry);
             lock (_gameObjects)
                 _gameObjects.Add(go);
         }
 
-        private void OnGameObjectDestroyRequested(GameObject go)
+        private void OnGameObjectDestroyRequested(EcsEntity go)
         {
             _destroyList.Add(go);
         }
 
-        private void OnGameObjectDestroyCommitted(GameObject go)
+        private void OnGameObjectDestroyCommitted(EcsEntity go)
         {
             lock (_gameObjects)
                 _gameObjects.Remove(go);
@@ -91,29 +87,9 @@ namespace Game.Core
 
         public void AnnounceInitialized() => Initialized = true;
 
-        public void SetRenderAction(Action action)
-        {
-            if (_renderAction != null) throw new Exception("Render action is already set");
-            _renderAction = action;
-        }
-
         // Main game loop
         public void Run(params Action[] perFrameActions)
         {
-#if RELEASE
-            try
-            {
-#endif
-            Initialize();
-#if RELEASE
-            }
-            catch (Exception e)
-            {
-                LogException(e);
-                return;
-            }
-#endif
-
             Running = true;
             _stopwatch = Stopwatch.StartNew();
 
@@ -131,13 +107,13 @@ namespace Game.Core
                 FlushDeletedObjects();
 
 
-                    var systemEnumerator = SystemRegistry.GetSystemsEnumerator();
-                    while (systemEnumerator.MoveNext())
-                    {
-                        var kvp = systemEnumerator.Current;
-                        GameSystem system = kvp.Value;
-                        system.Update(DeltaTime);
-                    }
+                var systemEnumerator = SystemRegistry.GetSystemsEnumerator();
+                while (systemEnumerator.MoveNext())
+                {
+                    var kvp = systemEnumerator.Current;
+                    ECS.EcsSystem system = kvp.Value;
+                    system.Update(DeltaTime);
+                }
 #if RELEASE
                 }
                 catch (Exception e)
@@ -145,16 +121,6 @@ namespace Game.Core
                     LogException(e);
                 }
 #endif
-
-                // Render
-                try
-                {
-                    _renderAction?.Invoke();
-                }
-                catch (Exception e)
-                {
-                    LogException(e);
-                }
 
                 foreach (var action in perFrameActions)
                 {
@@ -164,7 +130,7 @@ namespace Game.Core
                     }
                     catch (Exception e)
                     {
-                        LogException(e);
+                        CrashLogHelper.LogUnhandledException(e);
                     }
                 }
 
@@ -186,13 +152,8 @@ namespace Game.Core
             }
             catch (Exception e)
             {
-                LogException(e);
+                CrashLogHelper.LogUnhandledException(e);
             }
-        }
-
-        public void Exit()
-        {
-            Running = false;
         }
     }
 }

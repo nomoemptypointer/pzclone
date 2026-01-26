@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Game.Graphics.Shaders
+namespace Game.Core.Graphics.Shaders
 {
     public static class EmbeddedShaderAssets
     {

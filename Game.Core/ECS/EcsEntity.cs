@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Reflection;
+﻿using System.Diagnostics;
 
 namespace Game.Core.ECS
 {
-    public class GameObject
+    public class EcsEntity
     {
         private static long s_latestAssignedID = 0;
-
-        private readonly Dictionary<Type, List<Component>> _components = [];
+        private static ulong NextID => unchecked((ulong)Interlocked.Increment(ref s_latestAssignedID));
+        private readonly Dictionary<Type, List<EcsComponent>> _components = [];
         private SystemRegistry _registry;
         private bool _enabled = true;
         private bool _enabledInHierarchy = true;
@@ -26,16 +23,16 @@ namespace Game.Core.ECS
 
         public bool EnabledInHierarchy => _enabledInHierarchy;
 
-        internal static event Action<GameObject> InternalConstructed;
-        internal static event Action<GameObject> InternalDestroyRequested;
-        internal static event Action<GameObject> InternalDestroyCommitted;
+        internal static event Action<EcsEntity> InternalConstructed;
+        internal static event Action<EcsEntity> InternalDestroyRequested;
+        internal static event Action<EcsEntity> InternalDestroyCommitted;
 
-        public event Action<GameObject> Destroyed;
+        public event Action<EcsEntity> Destroyed;
 
-        public GameObject() : this(Guid.NewGuid().ToString())
+        public EcsEntity() : this(Guid.NewGuid().ToString())
         { }
 
-        public GameObject(string name)
+        public EcsEntity(string name)
         {
             Transform t = new(this);
             t.ParentChanged += OnTransformParentChanged;
@@ -43,17 +40,10 @@ namespace Game.Core.ECS
             Transform = t;
             Name = name;
             InternalConstructed?.Invoke(this);
-            ID = GetNextID();
+            ID = NextID;
         }
 
-        private static ulong GetNextID()
-        {
-            ulong newID = unchecked((ulong)Interlocked.Increment(ref s_latestAssignedID));
-            Debug.Assert(newID != 0); // Overflow
-            return newID;
-        }
-
-        public void AddComponent(Component component)
+        public void AddComponent(EcsComponent component)
         {
             var type = component.GetType();
 
@@ -67,9 +57,9 @@ namespace Game.Core.ECS
             component.AttachToGameObject(this, _registry);
         }
 
-        public void AddComponent<T>(T component) where T : Component => AddComponent((Component)component);
+        public void AddComponent<T>(T component) where T : EcsComponent => AddComponent((EcsComponent)component);
 
-        public void RemoveAll<T>() where T : Component
+        public void RemoveAll<T>() where T : EcsComponent
         {
             var type = typeof(T);
 
@@ -82,7 +72,7 @@ namespace Game.Core.ECS
             }
         }
 
-        public void RemoveComponent(Component component)
+        public void RemoveComponent(EcsComponent component)
         {
             var type = component.GetType();
 
@@ -98,9 +88,9 @@ namespace Game.Core.ECS
             }
         }
 
-        public void RemoveComponent<T>(T component) where T : Component => RemoveComponent((Component)component);
+        public void RemoveComponent<T>(T component) where T : EcsComponent => RemoveComponent((EcsComponent)component);
 
-        public Component? GetComponent(Type type)
+        public EcsComponent? GetComponent(Type type)
         {
             // Exact match
             if (_components.TryGetValue(type, out var list) && list.Count > 0)
@@ -116,7 +106,7 @@ namespace Game.Core.ECS
             return null;
         }
 
-        public T GetComponent<T>() where T : Component => (T)GetComponent(typeof(T));
+        public T GetComponent<T>() where T : EcsComponent => (T)GetComponent(typeof(T));
 
         public IEnumerable<T> GetComponentsByInterface<T>()
         {
@@ -137,12 +127,9 @@ namespace Game.Core.ECS
             return GetComponentsByInterface<T>().FirstOrDefault();
         }
 
-        internal void SetRegistry(SystemRegistry systemRegistry)
-        {
-            _registry = systemRegistry;
-        }
+        internal void SetRegistry(SystemRegistry systemRegistry) => _registry = systemRegistry;
 
-        public IEnumerable<T> GetComponents<T>() where T : Component
+        public IEnumerable<T> GetComponents<T>() where T : EcsComponent
         {
             var requestedType = typeof(T);
 
@@ -167,10 +154,10 @@ namespace Game.Core.ECS
             }
         }
 
-        public T GetComponentInParent<T>() where T : Component
+        public T GetComponentInParent<T>() where T : EcsComponent
         {
             T component;
-            GameObject parent = this;
+            EcsEntity parent = this;
             while ((parent = parent.Transform.Parent?.GameObject) != null)
             {
                 component = parent.GetComponent<T>();
@@ -183,7 +170,7 @@ namespace Game.Core.ECS
             return null;
         }
 
-        public T GetComponentInParentOrSelf<T>() where T : Component
+        public T GetComponentInParentOrSelf<T>() where T : EcsComponent
         {
             T component;
             component = GetComponentInParent<T>();
@@ -195,16 +182,16 @@ namespace Game.Core.ECS
             return component;
         }
 
-        public T GetComponentInChildren<T>() where T : Component
+        public T GetComponentInChildren<T>() where T : EcsComponent
         {
             return (T)GetComponentInChildren(typeof(T));
         }
 
-        public Component GetComponentInChildren(Type componentType)
+        public EcsComponent GetComponentInChildren(Type componentType)
         {
             foreach (var child in Transform.Children)
             {
-                Component ret = child.GameObject.GetComponent(componentType) ?? child.GameObject.GetComponentInChildren(componentType);
+                EcsComponent ret = child.GameObject.GetComponent(componentType) ?? child.GameObject.GetComponentInChildren(componentType);
                 if (ret != null)
                 {
                     return ret;
@@ -214,10 +201,7 @@ namespace Game.Core.ECS
             return null;
         }
 
-        public void Destroy()
-        {
-            InternalDestroyRequested.Invoke(this);
-        }
+        public void Destroy() => InternalDestroyRequested.Invoke(this);
 
         internal void CommitDestroy()
         {
@@ -270,7 +254,7 @@ namespace Game.Core.ECS
         {
             Debug.Assert(newState != _enabledInHierarchy);
             _enabledInHierarchy = newState;
-            foreach (var component in GetComponents<Component>())
+            foreach (var component in GetComponents<EcsComponent>())
             {
                 component.HierarchyEnabledStateChanged();
             }

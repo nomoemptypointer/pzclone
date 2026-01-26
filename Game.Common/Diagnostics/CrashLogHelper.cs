@@ -4,7 +4,7 @@ namespace Game.Core.Diagnostics
 {
     public static class CrashLogHelper
     {
-        public static void LogUnhandledException(Exception e, GameBase game)
+        public static void LogUnhandledException(Exception e)
         {
             using (var fs = File.CreateText("crashlog.txt"))
             {

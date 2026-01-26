@@ -4,5 +4,6 @@
   </Project>
   <Project Path="Game.Common/Game.Common.csproj" Id="9436f12a-ea1a-428a-b1f6-f7ae4351aa31" />
   <Project Path="Game.Core/Game.Core.csproj" Id="7d178cdd-9f68-434e-998e-bcac1bd1b7bb" />
+  <Project Path="Game.DedicatedServer/Game.DedicatedServer.csproj" Id="e2b1d9a2-ee16-4869-94e9-dcbea34deaa9" />
   <Project Path="Game.Desktop/Game.Desktop.csproj" Id="f92680c8-9bfd-44ef-a53d-22c8268190d0" />
 </Solution>

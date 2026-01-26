@@ -1,4 +1,5 @@
-﻿using Veldrid;
+﻿using Game.Common;
+using Veldrid;
 using Veldrid.Sdl2;
 using Veldrid.StartupUtilities;
 
@@ -13,6 +14,7 @@ namespace Game.Desktop
         public DesktopWindow()
         {
             Base = CreateSdlWindow();
+            Globals.Sdl2WindowHandle = Base;
         }
 
         private static Sdl2Window CreateSdlWindow()
@@ -43,7 +45,7 @@ namespace Game.Desktop
         {
             shownInit = true;
             Base.Visible = true;
-            Base.WindowState = WindowState.BorderlessFullScreen;
+            //Base.WindowState = WindowState.BorderlessFullScreen;
         }
     }
 }
