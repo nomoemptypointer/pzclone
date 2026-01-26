@@ -20,7 +20,5 @@
 	
     <ItemGroup>
       <ProjectReference Include="..\Game.Core\Game.Core.csproj" />
-      <ProjectReference Include="..\Game\Game.csproj" />
-      <ProjectReference Include="..\Game.Graphics\Game.Graphics.csproj" />
     </ItemGroup>
 </Project>

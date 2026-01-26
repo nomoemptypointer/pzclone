@@ -4,7 +4,7 @@ namespace Game.Graphics.Shaders
 {
     public static class EmbeddedShaderAssets
     {
-        private const string BaseNamespace = "Game.Graphics.GLSL.";
+        private const string BaseNamespace = "Game.Core.Graphics.GLSL.";
 
         /// <summary>
         /// Loads a shader embedded resource by file name (e.g., "DebugText.vert").

@@ -4,13 +4,13 @@
     {
         public bool Enabled { get; set; } = true;
 
-        public void Update(double deltaSeconds)
+        public void Update(double deltaTime)
         {
             if (Enabled)
-                UpdateCore(deltaSeconds);
+                UpdateCore(deltaTime);
         }
 
-        protected abstract void UpdateCore(double deltaSeconds);
+        protected abstract void UpdateCore(double deltaTime);
 
         public void OnNewSceneLoaded() => OnNewSceneLoadedCore();
 
