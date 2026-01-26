@@ -1,22 +1,21 @@
 ﻿using Game.Common.Windowing;
-using Game.Core;
 using Game.Graphics;
 using SDL3;
 using Veldrid;
-using Vulkan.Xlib;
 using static SDL3.SDL;
 
 namespace Game.Desktop
 {
     public class DesktopWindow : AbstractWindow
     {
-        private GraphicsDevice _gd;
-        private bool shown;
+        private bool shownInit;
 
-        public DesktopWindow(GraphicsBackend graphicsBackend)
-                        : base(CreateSdlWindow(graphicsBackend))
-        { }
-        private static nint CreateSdlWindow(GraphicsBackend graphicsBackend)
+        public DesktopWindow()
+        {
+            BaseSDL3 = CreateSdlWindow();
+        }
+
+        private nint CreateSdlWindow(GraphicsBackend graphicsBackend = GraphicsBackend.Vulkan)
         {
             WindowFlags flags = WindowFlags.Hidden | WindowFlags.Resizable;
 
@@ -37,9 +36,7 @@ namespace Game.Desktop
             }
 
             if (!Init(InitFlags.Video))
-            {
                 throw new Exception($"SDL could not initialize: {SDL.GetError()}");
-            }
 
             var window = CreateWindow(
                 "",
@@ -53,14 +50,9 @@ namespace Game.Desktop
 
         public override void Tick(GraphicsDevice gd)
         {
-            if (_gd == null) // TODO: This might be slow
-                GraphicsRenderer.Singleton.CreateGraphicsDevice();
-
-            _gd = GraphicsRenderer.Singleton.GraphicsDevice;
-
             while (!Core.Game.Instance.Initialized)
                 Thread.Sleep(10);
-            if (!shown)
+            if (!shownInit)
                 Show();
 
             while (PollEvent(out var e))
@@ -72,14 +64,11 @@ namespace Game.Desktop
                     GraphicsRenderer.Singleton.Resize((uint)width, (uint)height);
                 }
             }
-
-            //_gd.SwapBuffers();
-            _gd.WaitForIdle();
         }
 
         public override void Show()
         {
-            shown = true;
+            shownInit = true;
             ShowWindow(BaseSDL3);
         }
     }

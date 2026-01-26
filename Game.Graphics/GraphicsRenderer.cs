@@ -1,4 +1,5 @@
 ﻿using Game.Common.Windowing;
+using Game.Graphics.Shaders;
 using Veldrid;
 
 namespace Game.Graphics
@@ -7,24 +8,28 @@ namespace Game.Graphics
     {
         public static GraphicsRenderer Singleton { get; private set; }
         public GraphicsDevice GraphicsDevice { get; private set; }
-        public AbstractWindow Window { get; private set; }
+        public AbstractWindow Window { get; set; }
+        public ShaderManager ShaderManager { get; private set; }
         public bool FastFrame { get; private set; } = false;
 
-        public GraphicsRenderer(AbstractWindow window, GraphicsBackend backend = GraphicsBackend.Vulkan)
+        public GraphicsRenderer(GraphicsBackend backend = GraphicsBackend.Vulkan)
         {
             if (Singleton == null)
                 Singleton = this;
             else
                 throw new Exception();
+        }
 
-            Window = window;
+        public void Initialize()
+        {
+            CreateGraphicsDevice(false);
+            //CreateResouces();
         }
 
         public void CreateGraphicsDevice(bool recreate = false)
         {
             if (recreate)
                 GraphicsDevice.Dispose();
-            // TODO: Check if gd is disposed and throw exception 
 
             var options = new GraphicsDeviceOptions(
                 debug: true,
@@ -34,9 +39,9 @@ namespace Game.Graphics
             );
 
             if (Window.BaseSDL3 == 0)
-                throw new Exception("Window handle is null (CreateGraphicsDevice)"); // never gets fired because window exists
+                throw new Exception("Window handle is null (CreateGraphicsDevice)"); // never gets fired because window exists here (?)
 
-            var source = SwapchainSourceExtensions.CreateSDL(Window.BaseSDL3); // passed Window.BaseSDL3 here exists but inside the method it is null/zero
+            SwapchainSource source = SwapchainSourceExtensions.CreateSDL(Window.BaseSDL3); // BUG (Android): Passed Window.BaseSDL3 from here exists but inside the method it is null/zero
 
             var swapchainDesc = new SwapchainDescription(
                 source,
@@ -46,10 +51,18 @@ namespace Game.Graphics
                 false // vsync
             );
 
-            GraphicsDevice = GraphicsDevice.CreateVulkan(
+            GraphicsDevice = GraphicsDevice.CreateVulkan( // TODO: Legacy backend (opengl/es)
                 options,
                 swapchainDesc
             );
+        }
+
+        private void CreateResouces()
+        {
+            if (GraphicsDevice == null)
+                throw new Exception("Can't create resources when GraphicsDevice was not yet created");
+
+            ShaderManager = new(GraphicsDevice.ResourceFactory);
         }
 
         /// <summary>
@@ -78,7 +91,9 @@ namespace Game.Graphics
             cl.End();
 
             gd.SubmitCommands(cl);
-            if (!FastFrame) gd.SwapBuffers(sc);
+
+            if (!FastFrame)
+                gd.SwapBuffers(sc);
         }
     }
 }

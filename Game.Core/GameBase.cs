@@ -1,7 +1,8 @@
 ﻿using Game.Core.Diagnostics;
 using Game.Core.ECS;
+using Game.Graphics;
 using System.Diagnostics;
-using System.Security.Cryptography.X509Certificates;
+using Veldrid;
 
 namespace Game.Core
 {
@@ -51,8 +52,15 @@ namespace Game.Core
             GameObject.InternalDestroyCommitted += OnGameObjectDestroyCommitted;
         }
 
-        public abstract void Initialize();
-        public abstract void Shutdown();
+        public virtual void Initialize()
+        {
+            GraphicsRenderer.Singleton.Initialize();
+        }
+
+        public virtual void Shutdown()
+        {
+
+        }
 
         protected void LogException(Exception e) => CrashLogHelper.LogUnhandledException(e, this);
 
@@ -148,7 +156,6 @@ namespace Game.Core
                     LogException(e);
                 }
 
-                // Run user-provided per-frame actions (like rendering)
                 foreach (var action in perFrameActions)
                 {
                     try

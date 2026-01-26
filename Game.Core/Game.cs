@@ -18,6 +18,8 @@ namespace Game.Core
 
         public override void Initialize()
         {
+            base.Initialize();
+
             _player = new GameObject();
 
             AnnounceInitialized(); // Signals that the game has been initialized and should handle window stuff etc
@@ -25,6 +27,7 @@ namespace Game.Core
 
         public override void Shutdown()
         {
+            base.Shutdown();
             // TODO: cleanup resources
         }
     }

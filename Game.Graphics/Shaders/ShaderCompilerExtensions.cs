@@ -1,11 +1,11 @@
 ﻿using Veldrid;
 using Veldrid.SPIRV;
 
-namespace Game.Graphics
+namespace Game.Graphics.Shaders
 {
-    internal class Spirv
+    public static class ShaderCompilerExtensions
     {
-        public static ShaderDescription CompileShader(ResourceFactory factory, ShaderStages stage, string glslSource, string fileName)
+        public static ShaderDescription CompileShader(ShaderStages stage, string glslSource, string fileName)
         {
             var compilation = SpirvCompilation.CompileGlslToSpirv(
                 glslSource,

@@ -5,13 +5,12 @@ namespace Game.Core.ECS
     public abstract class Component
     {
         public GameObject GameObject { get; internal set; }
-        private Transform _transform; // TODO: { get; internal set; }
-        public Transform Transform => _transform;
+        public Transform Transform { get; internal set; }
 
-        internal void AttachToGameObject(GameObject go, SystemRegistry registry)
+        internal void AttachToGameObject(GameObject gameObject, SystemRegistry registry)
         {
-            // TODO: go param bug fix
-            _transform = GameObject.Transform;
+            GameObject = gameObject;
+            Transform = GameObject.Transform;
             InternalAttached(registry);
         }
 
