@@ -1,4 +1,5 @@
 ﻿using Veldrid;
+using Veldrid.SPIRV;
 
 namespace Game.Graphics.Shaders
 {
@@ -35,10 +36,9 @@ namespace Game.Graphics.Shaders
                 fragmentSource,
                 fragmentFile);
 
-            slot = new ShaderProgram(
-                _factory.CreateShader(vsDesc),
-                _factory.CreateShader(fsDesc)
-            );
+            Shader[] shaderPack = _factory.CreateFromSpirv(vsDesc, fsDesc);
+
+            slot = new ShaderProgram(shaderPack);
 
             return slot;
         }

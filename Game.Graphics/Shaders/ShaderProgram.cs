@@ -1,25 +1,15 @@
 ﻿using Veldrid;
-using Veldrid.SPIRV;
 
 namespace Game.Graphics.Shaders
 {
-    public sealed class ShaderProgram : IDisposable
+    public sealed class ShaderProgram(Shader[] shaders) : IDisposable
     {
-        public Shader Vertex { get; }
-        public Shader Fragment { get; }
-
-        public Shader[] Shaders => [Vertex, Fragment];
-
-        public ShaderProgram(Shader vertex, Shader fragment)
-        {
-            Vertex = vertex;
-            Fragment = fragment;
-        }
+        public Shader[] Shaders { get; } = shaders;
 
         public void Dispose()
         {
-            //Vertex.Dispose();
-            //Fragment.Dispose();
+            foreach(var shader in Shaders)
+                shader.Dispose();
         }
     }
 }

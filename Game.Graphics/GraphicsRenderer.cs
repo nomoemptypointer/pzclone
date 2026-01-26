@@ -26,7 +26,7 @@ namespace Game.Graphics
         public void Initialize()
         {
             CreateGraphicsDevice(false);
-            //CreateResouces();
+            CreateResouces();
         }
 
         public void AttachExistingGraphicsDeviceAndroid(GraphicsDevice graphicsDevice)

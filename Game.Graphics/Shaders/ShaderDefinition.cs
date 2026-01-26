@@ -2,8 +2,6 @@
 {
     public readonly struct ShaderDefinition
     {
-        const string Prefix = "Game.Graphics.Shaders.GLSL.";
-
         public readonly string VertexSource;
         public readonly string FragmentSource;
         public readonly string VertexName;
@@ -11,8 +9,8 @@
 
         public ShaderDefinition(string name)
         {
-            VertexName = Prefix + name + ".vert";
-            FragmentName = Prefix + name + ".frag";
+            VertexName = name + ".vert";
+            FragmentName = name + ".frag";
 
             VertexSource = EmbeddedShaderAssets.Load(VertexName);
             FragmentSource = EmbeddedShaderAssets.Load(FragmentName);

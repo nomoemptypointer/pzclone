@@ -19,13 +19,13 @@
     </ItemGroup>
 	
 	<ItemGroup>
-	  <None Remove="Shaders\GLSL\DebugText.frag" />
-	  <None Remove="Shaders\GLSL\DebugText.vert" />
+	  <None Remove="GLSL\DebugText.frag" />
+	  <None Remove="GLSL\DebugText.vert" />
 	</ItemGroup>
 	
 	<ItemGroup>
-	  <EmbeddedResource Include="Shaders\GLSL\DebugText.frag" />
-	  <EmbeddedResource Include="Shaders\GLSL\DebugText.vert" />
+	  <EmbeddedResource Include="GLSL\DebugText.frag" />
+	  <EmbeddedResource Include="GLSL\DebugText.vert" />
 	</ItemGroup>
 
 </Project>
