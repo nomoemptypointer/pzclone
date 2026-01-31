@@ -11,7 +11,7 @@ namespace Game.Core.Graphics
     {
         public GraphicsDevice GraphicsDevice { get; internal set; }
         public IWindow Window => SystemRegistry.Get<IWindow>(); // TODO: Might be slow, assign once to field
-        public ShaderManager ShaderManager { get; private set; }
+        public ShaderRegistry ShaderManager { get; private set; }
         public RenderQueue RenderQueue { get; private set; }
         public Swapchain MainSwapchain { get; internal set; }
         public bool NoSwap { get; set; } = false;

@@ -13,7 +13,7 @@ namespace Game.Core.Graphics.Components
         public RgbaFloat Color { get; set; } = RgbaFloat.White;
 
         private GraphicsSystem _gs;
-        private ShaderProgram _shader;
+        private TextShader _shader;
         private DeviceBuffer _vertexBuffer;
         private DeviceBuffer _indexBuffer;
         private Texture _fontTexture;
@@ -25,7 +25,7 @@ namespace Game.Core.Graphics.Components
         protected override void Attached(SystemRegistry registry)
         {
             _gs = registry.GetSystem<GraphicsSystem>();
-            _shader = _gs.ShaderManager.Get(ShaderId.Text);
+            _shader = _gs.ShaderManager.Get<TextShader>();
 
             var factory = _gs.GraphicsDevice.ResourceFactory;
 
@@ -55,13 +55,6 @@ namespace Game.Core.Graphics.Components
                 worldBuffer
             ));
 
-            // Vertex layout
-            var vertexLayout = new VertexLayoutDescription(
-                new VertexElementDescription("Position", VertexElementSemantic.Position, VertexElementFormat.Float2),
-                new VertexElementDescription("TexCoords", VertexElementSemantic.TextureCoordinate, VertexElementFormat.Float2),
-                new VertexElementDescription("Color", VertexElementSemantic.Color, VertexElementFormat.Float4)
-            );
-
             // Pipeline description
             var pipelineDesc = new GraphicsPipelineDescription
             {
@@ -80,10 +73,10 @@ namespace Game.Core.Graphics.Components
                 ),
                 PrimitiveTopology = PrimitiveTopology.TriangleList,
                 ShaderSet = new ShaderSetDescription(
-                    vertexLayouts: new[] { vertexLayout },
-                    shaders: _shader.Shaders
+                    vertexLayouts: [_shader.Layout],
+                    shaders: [_shader.VertexShader, _shader.FragmentShader]
                 ),
-                ResourceLayouts = new[] { projViewLayout, textureLayout },
+                ResourceLayouts = [projViewLayout, textureLayout],
                 Outputs = _gs.GraphicsDevice.SwapchainFramebuffer.OutputDescription
             };
 

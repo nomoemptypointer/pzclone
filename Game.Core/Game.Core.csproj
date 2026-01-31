@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Graphics\GLSL\DebugText.frag" />
-    <EmbeddedResource Include="Graphics\GLSL\DebugText.vert" />
+    <EmbeddedResource Include="Graphics\Shaders\GLSL\Text.frag" />
+    <EmbeddedResource Include="Graphics\Shaders\GLSL\Text.vert" />
   </ItemGroup>
 
   <ItemGroup>
