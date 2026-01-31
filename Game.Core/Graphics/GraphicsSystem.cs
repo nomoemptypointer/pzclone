@@ -20,9 +20,9 @@ namespace Game.Core.Graphics
 
         public GraphicsSystem()
         {
-            int mainThreadId = Environment.CurrentManagedThreadId;
-            _taskScheduler = new GraphicsSystemTaskScheduler(mainThreadId);
-            Console.WriteLine("GraphicsSystem::mainThreadId=" + mainThreadId);
+            int threadId = Environment.CurrentManagedThreadId;
+            _taskScheduler = new GraphicsSystemTaskScheduler(threadId);
+            Console.WriteLine("GraphicsSystem::threadId=" + threadId);
             RenderQueue = new();
         }
 

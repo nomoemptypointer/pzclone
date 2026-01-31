@@ -1,6 +1,5 @@
 ﻿using Game.Core.Diagnostics;
 using Game.Core.ECS;
-using Game.Core.Graphics;
 using System.Diagnostics;
 
 namespace Game.Core
@@ -93,31 +92,37 @@ namespace Game.Core
                 _accumulatedTime = frameStart;
 
 #if RELEASE
-                try
-                {
+        try
+        {
 #endif
-                    FlushDeletedEntities();
-                    foreach (var system in SystemRegistry.GetAllSystems())
-                    {
-                        system.Update(DeltaTime);
-                    }
+                Console.WriteLine("tick");
+                FlushDeletedEntities();
+                foreach (var system in SystemRegistry.GetAllSystems())
+                    system.Update(DeltaTime);
 #if RELEASE
-                }
-                catch (Exception e)
-                {
-                    CrashLogHelper.LogUnhandledException(e);
-                }
+        }
+        catch (Exception e)
+        {
+            CrashLogHelper.LogUnhandledException(e);
+        }
 #endif
 
+                // Frame limiting
                 double frameEnd = _stopwatch.Elapsed.TotalSeconds;
                 double frameTime = frameEnd - frameStart;
                 double sleepTime = TargetFrameTime - frameTime;
 
                 if (sleepTime > 0)
                 {
-                    int sleepMs = (int)(sleepTime * 1000);
+                    int sleepMs = (int)(sleepTime * 1000) - 1; // coarse sleep
                     if (sleepMs > 0)
                         Thread.Sleep(sleepMs);
+
+                    double targetEnd = frameStart + TargetFrameTime;
+                    while (_stopwatch.Elapsed.TotalSeconds < targetEnd)
+                    {
+                        // spin wait for sub-millisecond precision
+                    }
                 }
             }
 

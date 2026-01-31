@@ -1,6 +1,7 @@
 ﻿using Game.Core.ECS;
 using Game.Core.ECS.Systems;
 using Game.Core.Graphics;
+using Game.Core.Graphics.Components;
 
 namespace Game.Core
 {
@@ -30,7 +31,10 @@ namespace Game.Core
                 graphicsSystem.InitializeAll();
 
             SystemRegistry.Register(new InputSystem(window));
+
+            // -- game stuff now
             _player = new EcsEntity();
+            _player.AddComponent(new Text2D());
 
             AnnounceInitialized();
         }

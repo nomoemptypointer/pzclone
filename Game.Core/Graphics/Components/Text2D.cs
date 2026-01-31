@@ -26,7 +26,6 @@ namespace Game.Core.Graphics.Components
         {
             _gs = registry.GetSystem<GraphicsSystem>();
             _shader = _gs.ShaderManager.Get<TextShader>();
-
             var factory = _gs.GraphicsDevice.ResourceFactory;
 
             // Create uniform buffers
