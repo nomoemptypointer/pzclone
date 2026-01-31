@@ -4,7 +4,7 @@
     {
         public static readonly ShaderDefinition[] All =
         [
-            new("DebugText"),
+            new("Text"),
         ];
 
         public readonly string VertexSource;
@@ -24,7 +24,7 @@
 
     public enum ShaderId
     {
-        DebugText,
+        Text,
 
         Count // always last
     }

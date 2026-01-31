@@ -14,6 +14,11 @@ namespace Game.Core.ECS.Systems
             Window ??= SystemRegistry.Get<IWindow>();
         }
 
+        public InputSystem(IWindow window)
+        {
+            Window = window;
+        }
+
         private HashSet<Key> _currentlyPressedKeys = [];
         private HashSet<Key> _newKeysThisFrame = [];
         private HashSet<MouseButton> _currentlyPressedMouseButtons = [];

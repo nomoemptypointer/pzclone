@@ -20,19 +20,16 @@ namespace Game.Core
 
         public override void Initialize()
         {
-            if (!OperatingSystem.IsAndroid())
-                SystemRegistry.Register<IWindow, DesktopWindowSystem>(new DesktopWindowSystem());
-
+            base.Initialize();
+            var window = new DesktopWindowSystem();
+            SystemRegistry.Register<IWindow, DesktopWindowSystem>(window);
             var graphicsSystem = new GraphicsSystem();
             SystemRegistry.Register(graphicsSystem);
 
             if (!OperatingSystem.IsAndroid())
                 graphicsSystem.InitializeAll();
 
-            SystemRegistry.Register(new InputSystem());
-
-            base.Initialize();
-
+            SystemRegistry.Register(new InputSystem(window));
             _player = new EcsEntity();
 
             AnnounceInitialized();

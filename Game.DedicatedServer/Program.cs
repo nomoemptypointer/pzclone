@@ -10,7 +10,6 @@ namespace Game.DedicatedServer
         {
             ServerInstance = new();
             ServerInstance.Initialize();
-            ServerInstance.RunLoop();
             ServerInstance.Shutdown();
         }
     }

@@ -57,7 +57,7 @@ namespace Game.Core
             Running = false;
         }
 
-        protected void FlushDeletedEntities()
+        private void FlushDeletedEntities()
         {
             foreach (EcsEntity entity in _destroyList)
                 entity.CommitDestroy();
@@ -75,13 +75,13 @@ namespace Game.Core
 
         private void OnEntityDestroyCommitted(EcsEntity entity) { lock (_entites) _entites.Remove(entity); }
 
-        public void AnnounceInitialized()
+        protected void AnnounceInitialized()
         {
             Running = true;
             RunLoop();
         }
 
-        public void RunLoop()
+        private void RunLoop()
         {
             _stopwatch = Stopwatch.StartNew();
 

@@ -4,7 +4,7 @@
     {
         public GameServer()
         {
-            TargetFramesPerSecond = 480;
+            TargetFramesPerSecond = 240;
         }
 
         public override void Initialize()

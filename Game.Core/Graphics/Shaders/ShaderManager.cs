@@ -43,7 +43,7 @@ namespace Game.Core.Graphics.Shaders
             return slot;
         }
 
-        public void LoadAllInternal()
+        internal void LoadAllInternal()
         {
             for (int i = 0; i < (int)ShaderId.Count; i++)
             {

@@ -7,7 +7,7 @@ namespace Game.Desktop
         static void Main() // TODO: We need to wrap this into some method outside Game.Desktop
         {
             Core.GameClient client = new();
-            Core.GameServer server = new();
+            Core.GameServer server = new(); // Server creation here is only for early development to immediately skip game menu (I think)
 
             var serverThread = new Thread(() =>
             {
