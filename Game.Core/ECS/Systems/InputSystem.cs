@@ -9,22 +9,23 @@ namespace Game.Core.ECS.Systems
         public InputSnapshot FrameSnapshot { get; internal set; }
         public IWindow Window { get; set; }
 
+        public InputSystem()
+        {
+            Window ??= SystemRegistry.Get<IWindow>();
+        }
+
         private HashSet<Key> _currentlyPressedKeys = [];
         private HashSet<Key> _newKeysThisFrame = [];
         private HashSet<MouseButton> _currentlyPressedMouseButtons = [];
         private HashSet<MouseButton> _newMouseButtonsThisFrame = [];
 
         public bool GetKey(Key key) => _currentlyPressedKeys.Contains(key);
-
         public bool GetKeyDown(Key key) => _newKeysThisFrame.Contains(key);
-
         public bool GetMouseButton(MouseButton button) => _currentlyPressedMouseButtons.Contains(button);
-
         public bool GetMouseButtonDown(MouseButton button) => _newMouseButtonsThisFrame.Contains(button);
 
         protected override void UpdateCore(double deltaTime)
         {
-            Window ??= SystemRegistry.Get<IWindow>();
             FrameSnapshot = Window.Base.PumpEvents();
 
             _newKeysThisFrame.Clear();
